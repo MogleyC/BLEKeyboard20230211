@@ -1,0 +1,38 @@
+<!DOCTYPE CrossWorks_Settings_File>
+<settings>
+  <setting name="Environment/Build/Show Build Information">Yes</setting>
+  <setting name="Environment/Build/Show Unparsed Error Output">Yes</setting>
+  <setting name="Find In Files/Context">Entire Solution</setting>
+  <setting name="Find Window/File Type">*.*</setting>
+  <setting name="Text Editor/Default Codec">EUC-KR</setting>
+  <setting name="Text Editor/Find/History">NRF_SDH_BLE_PERIPHERAL_LINK_COUNT;APP_TIMER_V2_RTC1;APP_TIMER_V2_RTC1_ENABLED;NRF_BLE_GATT_ENABLED;BLE_GATT_;ble_nus_on_ble_evt;ble_nus_on_ble;m_nus;m_qwr;bsp_event_handler</setting>
+  <setting name="Text Editor/Font">????u,10,-1,5,50,0,0,0,0,0</setting>
+  <setting name="Text Editor/Formatting/AlignTrailingComments">No</setting>
+  <setting name="Text Editor/Formatting/AllowShortBlocksOnASingleLine">Yes</setting>
+  <setting name="Text Editor/Formatting/BreakBeforeBraces">Allman</setting>
+  <setting name="Text Editor/Formatting/IndentCaseLabels">Yes</setting>
+  <setting name="Text Editor/Formatting/IndentWidth">4</setting>
+  <setting name="Text Editor/Formatting/MaxEmptyLinesToKeep">2</setting>
+  <setting name="Text Editor/Formatting/PointerAlignment">Middle</setting>
+  <setting name="Text Editor/Formatting/ReflowComments">No</setting>
+  <setting name="Text Editor/Formatting/SortIncludes">No</setting>
+  <setting name="Text Editor/Formatting/TabWidth">4</setting>
+  <setting name="Text Editor/Formatting/UseTab">ForIndentation</setting>
+  <setting name="Text Editor/FormattingStyle">Nordic Semiconductor</setting>
+  <setting name="Text Editor/Indent/Assembly Language/Indent Mode">Smart</setting>
+  <setting name="Text Editor/Indent/Assembly Language/Size">4</setting>
+  <setting name="Text Editor/Indent/Assembly Language/Tab Size">4</setting>
+  <setting name="Text Editor/Indent/Assembly Language/Use Tabs">Yes</setting>
+  <setting name="Text Editor/Indent/C and C++/Indent Mode">Smart</setting>
+  <setting name="Text Editor/Indent/C and C++/Size">4</setting>
+  <setting name="Text Editor/Indent/C and C++/Tab Size">4</setting>
+  <setting name="Text Editor/Indent/C and C++/Use Tabs">Yes</setting>
+  <setting name="Text Editor/Indent/Default/Indent Mode">Smart</setting>
+  <setting name="Text Editor/Indent/Default/Size">4</setting>
+  <setting name="Text Editor/Indent/Default/Tab Size">4</setting>
+  <setting name="Text Editor/Indent/Default/Use Tabs">Yes</setting>
+  <setting name="Text Editor/Indent/Java/Indent Mode">Smart</setting>
+  <setting name="Text Editor/Indent/Java/Size">4</setting>
+  <setting name="Text Editor/Indent/Java/Tab Size">4</setting>
+  <setting name="Text Editor/Indent/Java/Use Tabs">Yes</setting>
+</settings>
