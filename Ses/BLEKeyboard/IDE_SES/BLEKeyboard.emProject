@@ -1,0 +1,75 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="BLEKeyboard" target="8" version="2">
+  <configuration Name="Common" />
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="None" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="Level 2"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 2 balanced" />
+  <project Name="BLEKeyboard_nrf52832_s132">
+    <configuration
+      Name="Common"
+      Target="nRF52832_xxAA"
+      arm_architecture="v7EM"
+      arm_core_type="Cortex-M4"
+      arm_endian="Little"
+      arm_fp_abi="Hard"
+      arm_fpu_type="FPv4-SP-D16"
+      arm_linker_heap_size="8192"
+      arm_linker_process_stack_size="0"
+      arm_linker_stack_size="8192"
+      arm_rtl_variant="SEGGER"
+      arm_simulator_memory_simulation_parameter="RWX 00000000,00100000,FFFFFFFF;RWX 20000000,00010000,CDCDCDCD"
+      arm_target_debug_interface_type="ADIv5"
+      arm_target_device_name="nRF52832_xxAA"
+      arm_target_interface_type="SWD"
+      c_preprocessor_definitions="NRF52832_XXAA;NRF52;NRF52_PAN_74;FLOAT_ABI_HARD;CONFIG_GPIO_AS_PINRESET;INITIALIZE_USER_SECTIONS;S132;SOFTDEVICE_PRESENT;NO_VTOR_CONFIG;NRF_SD_BLE_API_VERSION=7;APP_TIMER_V2;APP_TIMER_V2_RTC1_ENABLED;BOARD_PCA10040"
+      c_user_include_directories="$(SrcPath);$(SrcPath)/$(nRFSdkVer)/$(nRFSoftDeviceVer);$(nRFSdkPath)/components;$(nRFSdkPath)/components/ble/ble_advertising;$(nRFSdkPath)/components/ble/ble_dtm;$(nRFSdkPath)/components/ble/ble_link_ctx_manager;$(nRFSdkPath)/components/ble/ble_racp;$(nRFSdkPath)/components/ble/ble_services/ble_ancs_c;$(nRFSdkPath)/components/ble/ble_services/ble_ans_c;$(nRFSdkPath)/components/ble/ble_services/ble_bas;$(nRFSdkPath)/components/ble/ble_services/ble_bas_c;$(nRFSdkPath)/components/ble/ble_services/ble_cscs;$(nRFSdkPath)/components/ble/ble_services/ble_cts_c;$(nRFSdkPath)/components/ble/ble_services/ble_dfu;$(nRFSdkPath)/components/ble/ble_services/ble_dis;$(nRFSdkPath)/components/ble/ble_services/ble_gls;$(nRFSdkPath)/components/ble/ble_services/ble_hids;$(nRFSdkPath)/components/ble/ble_services/ble_hrs;$(nRFSdkPath)/components/ble/ble_services/ble_hrs_c;$(nRFSdkPath)/components/ble/ble_services/ble_hts;$(nRFSdkPath)/components/ble/ble_services/ble_ias;$(nRFSdkPath)/components/ble/ble_services/ble_ias_c;$(nRFSdkPath)/components/ble/ble_services/ble_lbs;$(nRFSdkPath)/components/ble/ble_services/ble_lbs_c;$(nRFSdkPath)/components/ble/ble_services/ble_lls;$(nRFSdkPath)/components/ble/ble_services/ble_nus;$(nRFSdkPath)/components/ble/ble_services/ble_nus_c;$(nRFSdkPath)/components/ble/ble_services/ble_rscs;$(nRFSdkPath)/components/ble/ble_services/ble_rscs_c;$(nRFSdkPath)/components/ble/ble_services/ble_tps;$(nRFSdkPath)/components/ble/common;$(nRFSdkPath)/components/ble/nrf_ble_gatt;$(nRFSdkPath)/components/ble/nrf_ble_qwr;$(nRFSdkPath)/components/ble/peer_manager;$(nRFSdkPath)/components/boards;$(nRFSdkPath)/components/libraries/atomic;$(nRFSdkPath)/components/libraries/atomic_fifo;$(nRFSdkPath)/components/libraries/atomic_flags;$(nRFSdkPath)/components/libraries/balloc;$(nRFSdkPath)/components/libraries/bootloader/ble_dfu;$(nRFSdkPath)/components/libraries/bsp;$(nRFSdkPath)/components/libraries/button;$(nRFSdkPath)/components/libraries/cli;$(nRFSdkPath)/components/libraries/crc16;$(nRFSdkPath)/components/libraries/crc32;$(nRFSdkPath)/components/libraries/crypto;$(nRFSdkPath)/components/libraries/csense;$(nRFSdkPath)/components/libraries/csense_drv;$(nRFSdkPath)/components/libraries/delay;$(nRFSdkPath)/components/libraries/ecc;$(nRFSdkPath)/components/libraries/experimental_section_vars;$(nRFSdkPath)/components/libraries/experimental_task_manager;$(nRFSdkPath)/components/libraries/fds;$(nRFSdkPath)/components/libraries/fstorage;$(nRFSdkPath)/components/libraries/gfx;$(nRFSdkPath)/components/libraries/gpiote;$(nRFSdkPath)/components/libraries/hardfault;$(nRFSdkPath)/components/libraries/hci;$(nRFSdkPath)/components/libraries/led_softblink;$(nRFSdkPath)/components/libraries/log;$(nRFSdkPath)/components/libraries/log/src;$(nRFSdkPath)/components/libraries/low_power_pwm;$(nRFSdkPath)/components/libraries/mem_manager;$(nRFSdkPath)/components/libraries/memobj;$(nRFSdkPath)/components/libraries/mpu;$(nRFSdkPath)/components/libraries/mutex;$(nRFSdkPath)/components/libraries/pwm;$(nRFSdkPath)/components/libraries/pwr_mgmt;$(nRFSdkPath)/components/libraries/queue;$(nRFSdkPath)/components/libraries/ringbuf;$(nRFSdkPath)/components/libraries/scheduler;$(nRFSdkPath)/components/libraries/sdcard;$(nRFSdkPath)/components/libraries/sensorsim;$(nRFSdkPath)/components/libraries/slip;$(nRFSdkPath)/components/libraries/sortlist;$(nRFSdkPath)/components/libraries/spi_mngr;$(nRFSdkPath)/components/libraries/stack_guard;$(nRFSdkPath)/components/libraries/strerror;$(nRFSdkPath)/components/libraries/svc;$(nRFSdkPath)/components/libraries/timer;$(nRFSdkPath)/components/libraries/twi_mngr;$(nRFSdkPath)/components/libraries/twi_sensor;$(nRFSdkPath)/components/libraries/usbd;$(nRFSdkPath)/components/libraries/usbd/class/audio;$(nRFSdkPath)/components/libraries/usbd/class/cdc;$(nRFSdkPath)/components/libraries/usbd/class/cdc/acm;$(nRFSdkPath)/components/libraries/usbd/class/hid;$(nRFSdkPath)/components/libraries/usbd/class/hid/generic;$(nRFSdkPath)/components/libraries/usbd/class/hid/kbd;$(nRFSdkPath)/components/libraries/usbd/class/hid/mouse;$(nRFSdkPath)/components/libraries/usbd/class/msc;$(nRFSdkPath)/components/libraries/util;$(nRFSdkPath)/components/nfc/ndef/conn_hand_parser;$(nRFSdkPath)/components/nfc/ndef/conn_hand_parser/ac_rec_parser;$(nRFSdkPath)/components/nfc/ndef/conn_hand_parser/ble_oob_advdata_parser;$(nRFSdkPath)/components/nfc/ndef/conn_hand_parser/le_oob_rec_parser;$(nRFSdkPath)/components/nfc/ndef/connection_handover/ac_rec;$(nRFSdkPath)/components/nfc/ndef/connection_handover/ble_oob_advdata;$(nRFSdkPath)/components/nfc/ndef/connection_handover/ble_pair_lib;$(nRFSdkPath)/components/nfc/ndef/connection_handover/ble_pair_msg;$(nRFSdkPath)/components/nfc/ndef/connection_handover/common;$(nRFSdkPath)/components/nfc/ndef/connection_handover/ep_oob_rec;$(nRFSdkPath)/components/nfc/ndef/connection_handover/hs_rec;$(nRFSdkPath)/components/nfc/ndef/connection_handover/le_oob_rec;$(nRFSdkPath)/components/nfc/ndef/generic/message;$(nRFSdkPath)/components/nfc/ndef/generic/record;$(nRFSdkPath)/components/nfc/ndef/launchapp;$(nRFSdkPath)/components/nfc/ndef/parser/message;$(nRFSdkPath)/components/nfc/ndef/parser/record;$(nRFSdkPath)/components/nfc/ndef/text;$(nRFSdkPath)/components/nfc/ndef/uri;$(nRFSdkPath)/components/nfc/platform;$(nRFSdkPath)/components/nfc/t2t_lib;$(nRFSdkPath)/components/nfc/t2t_parser;$(nRFSdkPath)/components/nfc/t4t_lib;$(nRFSdkPath)/components/nfc/t4t_parser/apdu;$(nRFSdkPath)/components/nfc/t4t_parser/cc_file;$(nRFSdkPath)/components/nfc/t4t_parser/hl_detection_procedure;$(nRFSdkPath)/components/nfc/t4t_parser/tlv;$(nRFSdkPath)/components/softdevice/common;$(nRFSdkPath)/components/softdevice/s132/headers;$(nRFSdkPath)/components/softdevice/s132/headers/nrf52;$(nRFSdkPath)/components/toolchain/cmsis/include;$(nRFSdkPath)/external/fprintf;$(nRFSdkPath)/external/segger_rtt;$(nRFSdkPath)/external/utf_converter;$(nRFSdkPath)/integration/nrfx;$(nRFSdkPath)/integration/nrfx/legacy;$(nRFSdkPath)/modules/nrfx;$(nRFSdkPath)/modules/nrfx/drivers/include;$(nRFSdkPath)/modules/nrfx/hal;$(nRFSdkPath)/modules/nrfx/mdk"
+      debug_additional_load_file="$(nRFSdkPath)/components/softdevice/s132/hex/s132_nrf52_7.2.0_softdevice.hex"
+      debug_register_definition_file="$(nRFSdkPath)/modules/nrfx/mdk/nrf52.svd"
+      debug_start_from_entry_point_symbol="No"
+      debug_target_connection="J-Link"
+      gcc_entry_point="Reset_Handler"
+      link_linker_script_file="$(PackagesDir)/nRF/Scripts/nRF_Flash_Variant1.icf"
+      linker_output_format="hex"
+      linker_printf_fmt_level="long"
+      linker_printf_width_precision_supported="Yes"
+      linker_scanf_fmt_level="long"
+      linker_section_placement_file="$(SrcPath)/$(nRFSdkVer)/$(nRFSoftDeviceVer)/flash_placement.xml"
+      linker_section_placement_macros="FLASH_PH_START=0x0;FLASH_PH_SIZE=0x80000;RAM_PH_START=0x20000000;RAM_PH_SIZE=0x10000;FLASH_START=0x26000;FLASH_SIZE=0x5a000;RAM_START=0x20002250;RAM_SIZE=0xddb0"
+      linker_section_placements_segments="FLASH1 RX 0x0 0x80000;RAM1 RWX 0x20000000 0x10000"
+      macros="nRFSdkVer=nrf52832;nRFSoftDeviceVer=s132;nRFSdkPath=../../nRF5_SDK;SrcPath=../SRC;CMSIS_CONFIG_TOOL=../../nRF5_SDK/external_tools/cmsisconfig/CMSIS_Configuration_Wizard.jar"
+      project_directory=""
+      project_type="Executable"
+      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
+    <folder Name="Application">
+      <folder Name="SRC" />
+      <file file_name="$(SrcPath)/main.c" />
+    </folder>
+    <folder Name="System Files">
+      <folder Name="Segger Startup Files">
+        <file file_name="C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 7.10/source/thumb_crt0.s" />
+      </folder>
+      <folder Name="nRF_Segger_RTT">
+        <file file_name="$(nRFSdkPath)/external/segger_rtt/SEGGER_RTT.c" />
+        <file file_name="$(nRFSdkPath)/external/segger_rtt/SEGGER_RTT_Syscalls_SES.c">
+          <configuration Name="Common" build_exclude_from_build="Yes" />
+        </file>
+        <file file_name="$(nRFSdkPath)/external/segger_rtt/SEGGER_RTT_printf.c" />
+      </folder>
+      <file file_name="$(nRFSdkPath)/modules/nrfx/mdk/ses_startup_nrf52.s" />
+      <file file_name="$(nRFSdkPath)/modules/nrfx/mdk/ses_startup_nrf_common.s" />
+      <file file_name="$(nRFSdkPath)/modules/nrfx/mdk/system_nrf52.c" />
+    </folder>
+    <folder Name="nRF_ SDK">
+      <file file_name="$(SrcPath)/$(nRFSdkVer)/$(nRFSoftDeviceVer)/sdk_config.h" />
+    </folder>
+  </project>
+</solution>
