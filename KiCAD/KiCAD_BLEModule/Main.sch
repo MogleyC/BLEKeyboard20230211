@@ -1,0 +1,927 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 2
+Title "BLEModule"
+Date "2024-03-24"
+Rev "0.1"
+Comp "Kang Shin Gu"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Wire Wire Line
+	2650 3800 2650 3650
+Connection ~ 2650 3800
+Wire Wire Line
+	3600 3800 2650 3800
+Wire Wire Line
+	3600 3450 3600 3800
+Wire Wire Line
+	3400 3450 3600 3450
+$Comp
+L Custom:Y_32MHz Y?
+U 1 1 660ACE8F
+P 3300 3450
+AR Path="/61979BEC/660ACE8F" Ref="Y?"  Part="1" 
+AR Path="/616E62D0/660ACE8F" Ref="Y1"  Part="1" 
+F 0 "Y1" V 3400 3450 50  0000 L CNN
+F 1 "Y_32MHz" H 3300 3300 50  0001 C CNN
+F 2 "Custom:Crystal_SMD_2016-4Pin_2.0x1.6mm" H 3300 3450 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\2103291134_Yangxing-Tech-X201632MKD4SI_C108165.pdf" H 3300 3450 50  0001 C CNN
+F 4 "32MHz/Cl:8pF/±40ppm" V 3400 3550 50  0000 L CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=6614084" H 3300 3450 50  0001 C CNN "Shop"
+F 6 "X201632MKD4SI" H 3300 3450 50  0001 C CNN "Replacement"
+F 7 "SMD CRYSTAL" H 3300 3450 50  0001 C CNN "Type"
+F 8 "Yangxing Tech" H 3300 3450 50  0001 C CNN "Maker"
+	1    3300 3450
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	3200 3450 2650 3450
+Wire Wire Line
+	2650 3450 2650 3650
+Connection ~ 2650 3450
+Wire Wire Line
+	3300 3250 4250 3250
+Connection ~ 3300 3250
+Wire Wire Line
+	3300 3350 3300 3250
+Wire Wire Line
+	3300 3650 4250 3650
+Connection ~ 3300 3650
+Wire Wire Line
+	3300 3550 3300 3650
+Wire Wire Line
+	3050 3650 3300 3650
+Wire Wire Line
+	3050 3250 3300 3250
+Text GLabel 3950 4250 0    50   Input ~ 0
+nRF_SWCLK
+Text GLabel 3950 4350 0    50   BiDi ~ 0
+nRF_SWDIO
+$Comp
+L Custom:CAP_0.8pF_1005 C?
+U 1 1 660ACF09
+P 3900 5500
+AR Path="/61979BEC/660ACF09" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660ACF09" Ref="C10"  Part="1" 
+F 0 "C10" V 3950 5550 50  0000 L CNN
+F 1 "CAP_0.8pF_1005" V 4050 5450 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 3950 5600 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\2007221003_Murata-Electronics-GRM1555C1HR80WA01D_C162138.pdf" V 3950 5600 50  0001 C CNN
+F 4 "0.8pF/NP0/±5" V 4025 5500 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=9591919" H 3900 5500 50  0001 C CNN "Shop"
+F 6 "MURATA" H 3900 5500 50  0001 C CNN "Maker"
+F 7 "GRM1555C1HR80WA01D" H 3900 5500 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 3900 5500 50  0001 C CNN "Type"
+	1    3900 5500
+	1    0    0    -1  
+$EndComp
+Connection ~ 5150 1350
+Wire Wire Line
+	4950 1350 4950 1500
+Wire Wire Line
+	5150 1350 4950 1350
+Wire Wire Line
+	5350 1350 5350 1500
+Connection ~ 5350 1350
+Wire Wire Line
+	5150 1350 5150 1500
+Wire Wire Line
+	5350 1350 5150 1350
+Wire Wire Line
+	5350 1250 5350 1350
+$Comp
+L Custom:nRF52832-QFAA U?
+U 1 1 660ACF7F
+P 5150 3950
+AR Path="/61979BEC/660ACF7F" Ref="U?"  Part="1" 
+AR Path="/616E62D0/660ACF7F" Ref="U1"  Part="1" 
+F 0 "U1" H 4400 5600 50  0000 C CNN
+F 1 "nRF52832-QFAA" H 5150 3950 50  0000 C CNN
+F 2 "Custom:QFN-48-1EP_6x6mm_P0.4mm_EP4.3x4.3mm" H 5150 1850 50  0001 C CNN
+F 3 "http://infocenter.nordicsemi.com/pdf/nRF52832_PS_v1.4.pdf" H 4650 4150 50  0001 C CNN
+F 4 "nRF52832-QFAA" H 5150 3950 50  0001 C CNN "PartName"
+F 5 "https://smartstore.naver.com/ifcompany/products/4967647336?NaPm=ct%3Dkwokw22w%7Cci%3Dcheckout%7Ctr%3Dppc%7Ctrx%3D%7Chk%3D63ce9f0493f12b1792fbb3cdf49b14845d9c480b" H 5150 3950 50  0001 C CNN "Shop"
+F 6 "NORDIC SEMICONDUCTOR" H 5150 3950 50  0001 C CNN "Maker"
+F 7 "SMD MCU" H 5150 3950 50  0001 C CNN "Type"
+	1    5150 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5050 1750 5050 2100
+$Comp
+L power:GNDPWR #PWR02
+U 1 1 660ACF86
+P 5050 2100
+AR Path="/616E62D0/660ACF86" Ref="#PWR02"  Part="1" 
+AR Path="/61979BEC/660ACF86" Ref="#PWR?"  Part="1" 
+F 0 "#PWR02" H 5050 1900 50  0001 C CNN
+F 1 "GNDPWR" H 5054 1946 50  0001 C CNN
+F 2 "" H 5050 2050 50  0001 C CNN
+F 3 "" H 5050 2050 50  0001 C CNN
+	1    5050 2100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5250 1750 5250 2100
+$Comp
+L power:GNDPWR #PWR03
+U 1 1 660ACF8D
+P 5250 2100
+AR Path="/616E62D0/660ACF8D" Ref="#PWR03"  Part="1" 
+AR Path="/61979BEC/660ACF8D" Ref="#PWR?"  Part="1" 
+F 0 "#PWR03" H 5250 1900 50  0001 C CNN
+F 1 "GNDPWR" H 5254 1946 50  0001 C CNN
+F 2 "" H 5250 2050 50  0001 C CNN
+F 3 "" H 5250 2050 50  0001 C CNN
+	1    5250 2100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5150 1500 5250 1500
+Wire Wire Line
+	5250 1500 5250 1550
+Connection ~ 5150 1500
+Wire Wire Line
+	5150 1500 5150 2250
+Wire Wire Line
+	4950 1500 5050 1500
+Wire Wire Line
+	5050 1500 5050 1550
+Wire Wire Line
+	4950 1500 4950 2250
+$Comp
+L Custom:CAP_100nF_1005 C?
+U 1 1 660ACF9F
+P 5050 1650
+AR Path="/61979BEC/660ACF9F" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660ACF9F" Ref="C1"  Part="1" 
+F 0 "C1" V 5100 1700 50  0000 L CNN
+F 1 "CAP_100nF_1005" V 5200 1600 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 5100 1750 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\CL05A104KA5NNN_Specsheet.pdf" V 5100 1750 50  0001 C CNN
+F 4 "100nF/±10" V 5100 1400 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=8011439" H 5050 1650 50  0001 C CNN "Shop"
+F 6 "SAMSUNG ELECTRO-MECHANICS" H 5050 1650 50  0001 C CNN "Maker"
+F 7 "CL05A104KA5NNNC" H 5050 1650 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 5050 1650 50  0001 C CNN "Type"
+	1    5050 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom:CAP_100nF_1005 C?
+U 1 1 660ACFAA
+P 5250 1650
+AR Path="/61979BEC/660ACFAA" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660ACFAA" Ref="C2"  Part="1" 
+F 0 "C2" V 5300 1700 50  0000 L CNN
+F 1 "CAP_100nF_1005" V 5400 1600 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 5300 1750 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\CL05A104KA5NNN_Specsheet.pdf" V 5300 1750 50  0001 C CNN
+F 4 "100nF/±10" V 5300 1400 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=8011439" H 5250 1650 50  0001 C CNN "Shop"
+F 6 "SAMSUNG ELECTRO-MECHANICS" H 5250 1650 50  0001 C CNN "Maker"
+F 7 "CL05A104KA5NNNC" H 5250 1650 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 5250 1650 50  0001 C CNN "Type"
+	1    5250 1650
+	1    0    0    -1  
+$EndComp
+Connection ~ 4950 1500
+Wire Wire Line
+	5450 1750 5450 2100
+$Comp
+L power:GNDPWR #PWR04
+U 1 1 660ACFB2
+P 5450 2100
+AR Path="/616E62D0/660ACFB2" Ref="#PWR04"  Part="1" 
+AR Path="/61979BEC/660ACFB2" Ref="#PWR?"  Part="1" 
+F 0 "#PWR04" H 5450 1900 50  0001 C CNN
+F 1 "GNDPWR" H 5454 1946 50  0001 C CNN
+F 2 "" H 5450 2050 50  0001 C CNN
+F 3 "" H 5450 2050 50  0001 C CNN
+	1    5450 2100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 1500 5450 1500
+Wire Wire Line
+	5450 1500 5450 1550
+Wire Wire Line
+	5350 1500 5350 2250
+$Comp
+L Custom:+3.0V #PWR01
+U 1 1 660ACFBB
+P 5350 1250
+AR Path="/616E62D0/660ACFBB" Ref="#PWR01"  Part="1" 
+AR Path="/61979BEC/660ACFBB" Ref="#PWR?"  Part="1" 
+F 0 "#PWR01" H 5350 1100 50  0001 C CNN
+F 1 "+3.0V" H 5365 1423 50  0000 C CNN
+F 2 "" H 5350 1250 50  0001 C CNN
+F 3 "" H 5350 1250 50  0001 C CNN
+	1    5350 1250
+	1    0    0    -1  
+$EndComp
+Connection ~ 5350 1500
+$Comp
+L Custom:CAP_4.7uF_1005 C?
+U 1 1 660ACFC7
+P 5450 1650
+AR Path="/61979BEC/660ACFC7" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660ACFC7" Ref="C3"  Part="1" 
+F 0 "C3" V 5500 1700 50  0000 L CNN
+F 1 "CAP_4.7uF_1005" V 5600 1600 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 5500 1750 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\CL05A475KP5NRN_Specsheet.pdf" V 5500 1750 50  0001 C CNN
+F 4 "4.7uF/±10" V 5500 1400 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=8057798" H 5450 1650 50  0001 C CNN "Shop"
+F 6 "SAMSUNG ELECTRO-MECHANICS" H 5450 1650 50  0001 C CNN "Maker"
+F 7 "CL05A475KP5NRNC" H 5450 1650 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 5450 1650 50  0001 C CNN "Type"
+	1    5450 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom:CAP_100nF_1005 C?
+U 1 1 660ACFD2
+P 2650 2450
+AR Path="/61979BEC/660ACFD2" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660ACFD2" Ref="C4"  Part="1" 
+F 0 "C4" V 2600 2350 50  0000 C CNN
+F 1 "CAP_100nF_1005" V 2800 2400 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 2700 2550 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\CL05A104KA5NNN_Specsheet.pdf" V 2700 2550 50  0001 C CNN
+F 4 "100nF/±10" V 2600 2700 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=8011439" H 2650 2450 50  0001 C CNN "Shop"
+F 6 "SAMSUNG ELECTRO-MECHANICS" H 2650 2450 50  0001 C CNN "Maker"
+F 7 "CL05A104KA5NNNC" H 2650 2450 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 2650 2450 50  0001 C CNN "Type"
+	1    2650 2450
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GNDPWR #PWR05
+U 1 1 660ACFD8
+P 2350 2900
+AR Path="/616E62D0/660ACFD8" Ref="#PWR05"  Part="1" 
+AR Path="/61979BEC/660ACFD8" Ref="#PWR?"  Part="1" 
+F 0 "#PWR05" H 2350 2700 50  0001 C CNN
+F 1 "GNDPWR" H 2354 2746 50  0001 C CNN
+F 2 "" H 2350 2850 50  0001 C CNN
+F 3 "" H 2350 2850 50  0001 C CNN
+	1    2350 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 2900 2350 2450
+Wire Wire Line
+	2350 2450 2550 2450
+Wire Wire Line
+	2750 2450 4250 2450
+$Comp
+L Custom:CAP_N.C_1005 C?
+U 1 1 660ACFE3
+P 2950 2550
+AR Path="/61979BEC/660ACFE3" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660ACFE3" Ref="C5"  Part="1" 
+F 0 "C5" V 2900 2450 50  0000 C CNN
+F 1 "CAP_N.C_1005" V 3100 2500 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 3000 2650 50  0001 C CNN
+F 3 "~" V 3000 2650 50  0001 C CNN
+F 4 "N.C" V 2900 2650 50  0000 C CNN "PartName"
+F 5 "CHIP CERAMIC CAP" H 2950 2550 50  0001 C CNN "Type"
+	1    2950 2550
+	0    1    1    0   
+$EndComp
+$Comp
+L Custom:CAP_100nF_1005 C?
+U 1 1 660ACFEE
+P 3250 2650
+AR Path="/61979BEC/660ACFEE" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660ACFEE" Ref="C6"  Part="1" 
+F 0 "C6" V 3200 2550 50  0000 C CNN
+F 1 "CAP_100nF_1005" V 3400 2600 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 3300 2750 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\CL05A104KA5NNN_Specsheet.pdf" V 3300 2750 50  0001 C CNN
+F 4 "100nF/±10" V 3200 2900 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=8011439" H 3250 2650 50  0001 C CNN "Shop"
+F 6 "SAMSUNG ELECTRO-MECHANICS" H 3250 2650 50  0001 C CNN "Maker"
+F 7 "CL05A104KA5NNNC" H 3250 2650 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 3250 2650 50  0001 C CNN "Type"
+	1    3250 2650
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GNDPWR #PWR06
+U 1 1 660ACFF4
+P 2650 2900
+AR Path="/616E62D0/660ACFF4" Ref="#PWR06"  Part="1" 
+AR Path="/61979BEC/660ACFF4" Ref="#PWR?"  Part="1" 
+F 0 "#PWR06" H 2650 2700 50  0001 C CNN
+F 1 "GNDPWR" H 2654 2746 50  0001 C CNN
+F 2 "" H 2650 2850 50  0001 C CNN
+F 3 "" H 2650 2850 50  0001 C CNN
+	1    2650 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GNDPWR #PWR07
+U 1 1 660ACFFA
+P 2950 2900
+AR Path="/616E62D0/660ACFFA" Ref="#PWR07"  Part="1" 
+AR Path="/61979BEC/660ACFFA" Ref="#PWR?"  Part="1" 
+F 0 "#PWR07" H 2950 2700 50  0001 C CNN
+F 1 "GNDPWR" H 2954 2746 50  0001 C CNN
+F 2 "" H 2950 2850 50  0001 C CNN
+F 3 "" H 2950 2850 50  0001 C CNN
+	1    2950 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 2900 2650 2550
+Wire Wire Line
+	2650 2550 2850 2550
+Wire Wire Line
+	2950 2900 2950 2650
+Wire Wire Line
+	2950 2650 3150 2650
+Wire Wire Line
+	3350 2650 4250 2650
+Wire Wire Line
+	3050 2550 4250 2550
+$Comp
+L Custom:CAP_1uF_1005 C?
+U 1 1 660AD00B
+P 3550 2750
+AR Path="/61979BEC/660AD00B" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660AD00B" Ref="C7"  Part="1" 
+F 0 "C7" V 3500 2650 50  0000 C CNN
+F 1 "CAP_1uF_1005" V 3700 2700 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 3600 2850 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\CL05A105KA5NQN_Specsheet.pdf" V 3600 2850 50  0001 C CNN
+F 4 "1uF/±10" V 3600 2950 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=8010445" H 3550 2750 50  0001 C CNN "Shop"
+F 6 "SAMSUNG ELECTRO-MECHANICS" H 3550 2750 50  0001 C CNN "Maker"
+F 7 "CL05A105KA5NQNC" H 3550 2750 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 3550 2750 50  0001 C CNN "Type"
+	1    3550 2750
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GNDPWR #PWR08
+U 1 1 660AD011
+P 3250 2900
+AR Path="/616E62D0/660AD011" Ref="#PWR08"  Part="1" 
+AR Path="/61979BEC/660AD011" Ref="#PWR?"  Part="1" 
+F 0 "#PWR08" H 3250 2700 50  0001 C CNN
+F 1 "GNDPWR" H 3254 2746 50  0001 C CNN
+F 2 "" H 3250 2850 50  0001 C CNN
+F 3 "" H 3250 2850 50  0001 C CNN
+	1    3250 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 2900 3250 2750
+Wire Wire Line
+	3250 2750 3450 2750
+$Comp
+L Custom:CAP_12pF_1005 C?
+U 1 1 660AD01E
+P 2950 3250
+AR Path="/61979BEC/660AD01E" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660AD01E" Ref="C8"  Part="1" 
+F 0 "C8" V 2900 3150 50  0000 C CNN
+F 1 "CAP_12pF_1005" V 3100 3200 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 3000 3350 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\2002241431_Walsin-Tech-Corp-0402N120G250CT_C458856.pdf" V 3000 3350 50  0001 C CNN
+F 4 "12pF/NP0/±2" V 2900 3550 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=9226620" H 2950 3250 50  0001 C CNN "Shop"
+F 6 "WALSIN" H 2950 3250 50  0001 C CNN "Maker"
+F 7 "0402N120G250CT" H 2950 3250 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 2950 3250 50  0001 C CNN "Type"
+	1    2950 3250
+	0    1    1    0   
+$EndComp
+$Comp
+L Custom:CAP_12pF_1005 C?
+U 1 1 660AD029
+P 2950 3650
+AR Path="/61979BEC/660AD029" Ref="C?"  Part="1" 
+AR Path="/616E62D0/660AD029" Ref="C9"  Part="1" 
+F 0 "C9" V 3000 3550 50  0000 C CNN
+F 1 "CAP_12pF_1005" V 3100 3600 50  0001 C CNN
+F 2 "Custom:C_0402_1005Metric" V 3000 3750 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\2002241431_Walsin-Tech-Corp-0402N120G250CT_C458856.pdf" V 3000 3750 50  0001 C CNN
+F 4 "12pF/NP0/±2" V 3000 3975 50  0000 C CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=9226620" H 2950 3650 50  0001 C CNN "Shop"
+F 6 "WALSIN" H 2950 3650 50  0001 C CNN "Maker"
+F 7 "0402N120G250CT" H 2950 3650 50  0001 C CNN "Replacement"
+F 8 "CHIP CERAMIC CAP" H 2950 3650 50  0001 C CNN "Type"
+	1    2950 3650
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GNDPWR #PWR09
+U 1 1 660AD02F
+P 2650 3850
+AR Path="/616E62D0/660AD02F" Ref="#PWR09"  Part="1" 
+AR Path="/61979BEC/660AD02F" Ref="#PWR?"  Part="1" 
+F 0 "#PWR09" H 2650 3650 50  0001 C CNN
+F 1 "GNDPWR" H 2654 3696 50  0001 C CNN
+F 2 "" H 2650 3800 50  0001 C CNN
+F 3 "" H 2650 3800 50  0001 C CNN
+	1    2650 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 3850 2650 3800
+Wire Wire Line
+	2650 3650 2850 3650
+Wire Wire Line
+	2850 3250 2650 3250
+Wire Wire Line
+	2650 3250 2650 3450
+Connection ~ 2650 3650
+$Comp
+L Custom:L_3.9nH L?
+U 1 1 660AD03F
+P 3600 5150
+AR Path="/61979BEC/660AD03F" Ref="L?"  Part="1" 
+AR Path="/616E62D0/660AD03F" Ref="L3"  Part="1" 
+F 0 "L3" V 3785 5150 50  0000 C CNN
+F 1 "L_3.9nH" H 3630 5110 50  0001 L CNN
+F 2 "Custom:L_0402_1005Metric" H 3600 5150 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\JELF243B-0010.pdf" H 3600 5150 50  0001 C CNN
+F 4 "3.9nH/SHF6Ghz/±5%" V 3675 4750 50  0000 L CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=9578079" H 3600 5150 50  0001 C CNN "Shop"
+F 6 "MURATA" H 3600 5150 50  0001 C CNN "Maker"
+F 7 "LQG15HS3N9C02D" H 3600 5150 50  0001 C CNN "Replacement"
+F 8 "SMD INDUCTOR" H 3600 5150 50  0001 C CNN "Type"
+	1    3600 5150
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3700 5150 3900 5150
+Wire Wire Line
+	3900 5400 3900 5150
+Connection ~ 3900 5150
+Wire Wire Line
+	3900 5150 4250 5150
+Text Label 3000 5150 0    50   ~ 0
+ANT
+$Comp
+L Custom:L_15nH L?
+U 1 1 660AD0B4
+P 4050 2100
+AR Path="/61979BEC/660AD0B4" Ref="L?"  Part="1" 
+AR Path="/616E62D0/660AD0B4" Ref="L1"  Part="1" 
+F 0 "L1" V 4150 2050 50  0000 L CNN
+F 1 "L_15nH" H 4080 2060 50  0001 L CNN
+F 2 "Custom:L_0402_1005Metric" H 4050 2100 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\0900766b8090d53b.pdf" H 4050 2100 50  0001 C CNN
+F 4 "15nH/SHF2.45Ghz/±10%" V 4000 1900 50  0000 L CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=6591752" H 4050 2100 50  0001 C CNN "Shop"
+F 6 "MURATA" H 4050 2100 50  0001 C CNN "Maker"
+F 7 "LQG15HS15NJ02D" H 4050 2100 50  0001 C CNN "Replacement"
+F 8 "SMD INDUCTOR" H 4050 2100 50  0001 C CNN "Type"
+	1    4050 2100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Custom:L_10uH L?
+U 1 1 660AD0BF
+P 4400 2100
+AR Path="/61979BEC/660AD0BF" Ref="L?"  Part="1" 
+AR Path="/616E62D0/660AD0BF" Ref="L2"  Part="1" 
+F 0 "L2" V 4500 2050 50  0000 L CNN
+F 1 "L_10uH" H 4430 2060 50  0001 L CNN
+F 2 "Custom:L_0603_1608Metric" H 4400 2100 50  0001 C CNN
+F 3 ".\\Dataseets\\Replacement\\0900766b813f32d0.pdf" H 4400 2100 50  0001 C CNN
+F 4 "10uH/50mA/±20%" V 4575 1750 50  0000 L CNN "PartName"
+F 5 "https://www.eleparts.co.kr/goods/view?no=7457243" H 4400 2100 50  0001 C CNN "Shop"
+F 6 "MURATA" H 4400 2100 50  0001 C CNN "Maker"
+F 7 "LQM18FN100M00D" H 4400 2100 50  0001 C CNN "Replacement"
+F 8 "SMD INDUCTOR" H 4400 2100 50  0001 C CNN "Type"
+	1    4400 2100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3950 2100 3850 2100
+Wire Wire Line
+	4150 2100 4300 2100
+Wire Wire Line
+	4500 2100 4750 2100
+Wire Wire Line
+	4750 2100 4750 2250
+Wire Wire Line
+	3650 2750 3850 2750
+Wire Wire Line
+	3850 2100 3850 2750
+Connection ~ 3850 2750
+Wire Wire Line
+	3850 2750 4250 2750
+Text GLabel 3950 4150 0    50   Input ~ 0
+nRF_RESET
+Wire Wire Line
+	6050 2450 6600 2450
+Wire Wire Line
+	6050 2550 6600 2550
+Wire Wire Line
+	6050 2650 6600 2650
+Wire Wire Line
+	6050 2750 6600 2750
+Wire Wire Line
+	6050 2850 6600 2850
+Wire Wire Line
+	6050 2950 6600 2950
+Wire Wire Line
+	6050 3050 6600 3050
+Wire Wire Line
+	6050 3150 6600 3150
+Wire Wire Line
+	6050 3250 6600 3250
+Wire Wire Line
+	6050 3350 6600 3350
+Wire Wire Line
+	6050 3450 6600 3450
+Wire Wire Line
+	6050 3750 6600 3750
+Wire Wire Line
+	6050 3850 6600 3850
+Wire Wire Line
+	6050 3950 6600 3950
+Wire Wire Line
+	6050 4050 6600 4050
+Wire Wire Line
+	6050 4150 6600 4150
+Wire Wire Line
+	6050 4250 6600 4250
+Wire Wire Line
+	6050 4350 6600 4350
+Wire Wire Line
+	6050 4450 6600 4450
+Wire Wire Line
+	6050 4650 6600 4650
+Wire Wire Line
+	6050 4750 6600 4750
+Wire Wire Line
+	6050 4850 6600 4850
+Wire Wire Line
+	6050 4950 6600 4950
+Wire Wire Line
+	6050 5050 6600 5050
+Wire Wire Line
+	6050 5150 6600 5150
+Wire Wire Line
+	6050 5250 6600 5250
+Wire Wire Line
+	6050 5350 6600 5350
+Wire Wire Line
+	6050 5450 6600 5450
+Wire Wire Line
+	6050 5550 6600 5550
+$Comp
+L power:GNDPWR #PWR012
+U 1 1 66E0BBD9
+P 8150 6250
+F 0 "#PWR012" H 8150 6050 50  0001 C CNN
+F 1 "GNDPWR" H 8154 6096 50  0001 C CNN
+F 2 "" H 8150 6200 50  0001 C CNN
+F 3 "" H 8150 6200 50  0001 C CNN
+	1    8150 6250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8150 6250 8150 5850
+Text GLabel 8150 5650 0    50   BiDi ~ 0
+nRF_SWDIO
+Text GLabel 8150 5750 0    50   Output ~ 0
+nRF_SWCLK
+Wire Wire Line
+	6400 4550 6600 4550
+Wire Wire Line
+	3950 4250 4250 4250
+Wire Wire Line
+	3950 4350 4250 4350
+Wire Notes Line
+	8500 2450 8800 2450
+Wire Notes Line
+	8800 2450 8800 6000
+Wire Notes Line
+	8800 6000 8500 6000
+Wire Notes Line
+	8500 3600 8800 3600
+Wire Notes Line
+	8500 4800 8800 4800
+Text Notes 8800 2550 0    50   ~ 10
+LEFT OUT PADS
+Text Notes 8800 3700 0    50   ~ 10
+BOTTOM OUT PADS
+Text Notes 8800 4900 0    50   ~ 10
+RIGHT OUT PADS
+Text GLabel 6600 2550 2    50   BiDi ~ 0
+P01
+Text GLabel 6600 2650 2    50   BiDi ~ 0
+P02
+Text GLabel 6600 2750 2    50   BiDi ~ 0
+P03
+Text GLabel 6600 2850 2    50   BiDi ~ 0
+P04
+Text GLabel 6600 2950 2    50   BiDi ~ 0
+P05
+Text GLabel 6600 3050 2    50   BiDi ~ 0
+P06
+Text GLabel 6600 3150 2    50   BiDi ~ 0
+P07
+Text GLabel 6600 3250 2    50   BiDi ~ 0
+P08
+Text GLabel 6600 3350 2    50   BiDi ~ 0
+P09
+Text GLabel 6600 3450 2    50   BiDi ~ 0
+P10
+Text GLabel 6600 3550 2    50   BiDi ~ 0
+P11
+Text GLabel 6600 3650 2    50   BiDi ~ 0
+P12
+Text GLabel 6600 3750 2    50   BiDi ~ 0
+P13
+Text GLabel 6600 3850 2    50   BiDi ~ 0
+P14
+Text GLabel 6600 3950 2    50   BiDi ~ 0
+P15
+Text GLabel 6600 4050 2    50   BiDi ~ 0
+P16
+Text GLabel 6600 4150 2    50   BiDi ~ 0
+P17
+Text GLabel 6600 4250 2    50   BiDi ~ 0
+P18
+Text GLabel 6600 4350 2    50   BiDi ~ 0
+P19
+Text GLabel 6600 4450 2    50   BiDi ~ 0
+P20
+Text GLabel 6600 4550 2    50   BiDi ~ 0
+P21
+Text GLabel 6600 4650 2    50   BiDi ~ 0
+P22
+Text GLabel 6600 4750 2    50   BiDi ~ 0
+P23
+Text GLabel 6600 4850 2    50   BiDi ~ 0
+P24
+Text GLabel 6600 4950 2    50   BiDi ~ 0
+P25
+Text GLabel 6600 5050 2    50   BiDi ~ 0
+P26
+Text GLabel 6600 5150 2    50   BiDi ~ 0
+P27
+Text GLabel 6600 5250 2    50   BiDi ~ 0
+P28
+Text GLabel 6600 5350 2    50   BiDi ~ 0
+P29
+Text GLabel 6600 5450 2    50   BiDi ~ 0
+P30
+Text GLabel 6600 5550 2    50   BiDi ~ 0
+P31
+Text GLabel 6600 2450 2    50   BiDi ~ 0
+P00
+Text GLabel 8150 3250 0    50   BiDi ~ 0
+P01
+Text GLabel 8150 3350 0    50   BiDi ~ 0
+P02
+Text GLabel 8150 3450 0    50   BiDi ~ 0
+P03
+Text GLabel 8150 3550 0    50   BiDi ~ 0
+P04
+Text GLabel 8150 3650 0    50   BiDi ~ 0
+P05
+Text GLabel 8150 3750 0    50   BiDi ~ 0
+P06
+Text GLabel 8150 3850 0    50   BiDi ~ 0
+P07
+Text GLabel 8150 3950 0    50   BiDi ~ 0
+P08
+Text GLabel 8150 4050 0    50   BiDi ~ 0
+P09
+Text GLabel 8150 4150 0    50   BiDi ~ 0
+P10
+Text GLabel 8150 4250 0    50   BiDi ~ 0
+P11
+Text GLabel 8150 4350 0    50   BiDi ~ 0
+P12
+Text GLabel 8150 4450 0    50   BiDi ~ 0
+P13
+Text GLabel 8150 4550 0    50   BiDi ~ 0
+P14
+Text GLabel 8150 4650 0    50   BiDi ~ 0
+P15
+Text GLabel 8150 4750 0    50   BiDi ~ 0
+P16
+Text GLabel 8150 4850 0    50   BiDi ~ 0
+P17
+Text GLabel 8150 4950 0    50   BiDi ~ 0
+P18
+Text GLabel 8150 5050 0    50   BiDi ~ 0
+P19
+Text GLabel 8150 5150 0    50   BiDi ~ 0
+P20
+Text GLabel 8150 5250 0    50   BiDi ~ 0
+P21
+Text GLabel 8150 5350 0    50   BiDi ~ 0
+P22
+Text GLabel 8150 5450 0    50   BiDi ~ 0
+P23
+Text GLabel 8150 5550 0    50   BiDi ~ 0
+P24
+Text GLabel 8150 2450 0    50   BiDi ~ 0
+P25
+Text GLabel 8150 2550 0    50   BiDi ~ 0
+P26
+Text GLabel 8150 2650 0    50   BiDi ~ 0
+P27
+Text GLabel 8150 2750 0    50   BiDi ~ 0
+P28
+Text GLabel 8150 2850 0    50   BiDi ~ 0
+P29
+Text GLabel 8150 2950 0    50   BiDi ~ 0
+P30
+Text GLabel 8150 3050 0    50   BiDi ~ 0
+P31
+Text GLabel 8150 3150 0    50   BiDi ~ 0
+P00
+Wire Wire Line
+	8200 5750 8150 5750
+Wire Wire Line
+	8200 5650 8150 5650
+Wire Wire Line
+	8200 3050 8150 3050
+Wire Wire Line
+	8200 2950 8150 2950
+Wire Wire Line
+	8200 2850 8150 2850
+Wire Wire Line
+	8200 2750 8150 2750
+Wire Wire Line
+	8200 2650 8150 2650
+Wire Wire Line
+	8200 2550 8150 2550
+Wire Wire Line
+	8200 2450 8150 2450
+Wire Wire Line
+	8200 5550 8150 5550
+Wire Wire Line
+	8200 5450 8150 5450
+Wire Wire Line
+	8200 5350 8150 5350
+Wire Wire Line
+	8200 5250 8150 5250
+Wire Wire Line
+	8200 5150 8150 5150
+Wire Wire Line
+	8200 5050 8150 5050
+Wire Wire Line
+	8200 4950 8150 4950
+Wire Wire Line
+	8200 4850 8150 4850
+Wire Wire Line
+	8200 4750 8150 4750
+Wire Wire Line
+	8200 4650 8150 4650
+Wire Wire Line
+	8200 4550 8150 4550
+Wire Wire Line
+	8200 4450 8150 4450
+Wire Wire Line
+	8200 4350 8150 4350
+Wire Wire Line
+	8200 4250 8150 4250
+Wire Wire Line
+	8200 4150 8150 4150
+Wire Wire Line
+	8200 4050 8150 4050
+Wire Wire Line
+	8200 3950 8150 3950
+Wire Wire Line
+	8200 3850 8150 3850
+Wire Wire Line
+	8200 3750 8150 3750
+Wire Wire Line
+	8200 3650 8150 3650
+Wire Wire Line
+	8200 3550 8150 3550
+Wire Wire Line
+	8200 3450 8150 3450
+Wire Wire Line
+	8200 3350 8150 3350
+Wire Wire Line
+	8200 3250 8150 3250
+Wire Wire Line
+	8200 3150 8150 3150
+Wire Wire Line
+	8150 5850 8200 5850
+$Comp
+L Custom:+3.0V #PWR010
+U 1 1 67148FCB
+P 7550 5800
+AR Path="/616E62D0/67148FCB" Ref="#PWR010"  Part="1" 
+AR Path="/61979BEC/67148FCB" Ref="#PWR?"  Part="1" 
+F 0 "#PWR010" H 7550 5650 50  0001 C CNN
+F 1 "+3.0V" H 7565 5973 50  0000 C CNN
+F 2 "" H 7550 5800 50  0001 C CNN
+F 3 "" H 7550 5800 50  0001 C CNN
+	1    7550 5800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 5800 7550 5950
+Wire Wire Line
+	7550 5950 8200 5950
+$Comp
+L Custom:CastellatedPinHeader1.27mm_12 J1
+U 1 1 66036982
+P 8400 2950
+F 0 "J1" H 8480 2896 50  0000 L CNN
+F 1 "CastellatedPinHeader1.27mm_12" H 8480 2851 50  0001 L CNN
+F 2 "Custom:CastellatedPinHeader_1x12_P1.27mm_VerticalR" H 8400 2950 50  0001 C CNN
+F 3 "~" H 8400 2950 50  0001 C CNN
+	1    8400 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom:CastellatedPinHeader1.27mm_12 J2
+U 1 1 66039CEB
+P 8400 4150
+F 0 "J2" H 8480 4096 50  0000 L CNN
+F 1 "CastellatedPinHeader1.27mm_12" H 8480 4051 50  0001 L CNN
+F 2 "Custom:CastellatedPinHeader_1x12_P1.27mm_VerticalR" H 8400 4150 50  0001 C CNN
+F 3 "~" H 8400 4150 50  0001 C CNN
+	1    8400 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom:CastellatedPinHeader1.27mm_12 J3
+U 1 1 660420DC
+P 8400 5350
+F 0 "J3" H 8480 5296 50  0000 L CNN
+F 1 "CastellatedPinHeader1.27mm_12" H 8480 5251 50  0001 L CNN
+F 2 "Custom:CastellatedPinHeader_1x12_P1.27mm_VerticalR" H 8400 5350 50  0001 C CNN
+F 3 "~" H 8400 5350 50  0001 C CNN
+	1    8400 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6050 3550 6600 3550
+Wire Wire Line
+	6050 3650 6600 3650
+Connection ~ 4150 4150
+Wire Wire Line
+	4150 4150 4250 4150
+Wire Wire Line
+	3950 4150 4150 4150
+$Comp
+L power:GNDPWR #PWR011
+U 1 1 660ACE6A
+P 5150 5950
+AR Path="/616E62D0/660ACE6A" Ref="#PWR011"  Part="1" 
+AR Path="/61979BEC/660ACE6A" Ref="#PWR?"  Part="1" 
+F 0 "#PWR011" H 5150 5750 50  0001 C CNN
+F 1 "GNDPWR" H 5154 5796 50  0001 C CNN
+F 2 "" H 5150 5900 50  0001 C CNN
+F 3 "" H 5150 5900 50  0001 C CNN
+	1    5150 5950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5150 5750 5150 5850
+Wire Wire Line
+	3900 5600 3900 5850
+Wire Wire Line
+	3900 5850 5150 5850
+Connection ~ 5150 5850
+Wire Wire Line
+	5150 5850 5150 5950
+Wire Wire Line
+	4150 4150 4150 6150
+Wire Wire Line
+	6400 6150 4150 6150
+Wire Wire Line
+	6400 6150 6400 4550
+$Comp
+L Custom:PATTERN_ANT_FR4_0.8T ANT?
+U 1 1 660AD04B
+P 2800 5150
+AR Path="/660AD04B" Ref="ANT?"  Part="1" 
+AR Path="/61979BEC/660AD04B" Ref="ANT?"  Part="1" 
+AR Path="/616E62D0/660AD04B" Ref="ANT1"  Part="1" 
+F 0 "ANT1" H 2700 5300 50  0000 L CNN
+F 1 "PATTERN_ANT_FR4_0.8T" H 2775 5100 50  0000 L CNN
+F 2 "Custom:ANT_PATTERN_FR4_0.8T" H 2800 5150 50  0001 C CNN
+F 3 ".\\Dataseets\\001-91445_AN91445_Antenna_Design_and_RF_Layout_Guidelines.pdf" H 2800 5150 50  0001 C CNN
+	1    2800 5150
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 5150 3500 5150
+$EndSCHEMATC

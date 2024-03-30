@@ -1,0 +1,418 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP +3.0V
+D Power symbol creates a global label with name "+3.6V"
+K power-flag
+$ENDCMP
+#
+$CMP +3.6V
+D Power symbol creates a global label with name "+3.6V"
+K power-flag
+$ENDCMP
+#
+$CMP +5V
+D Power symbol creates a global label with name "+5V"
+K power-flag
+$ENDCMP
+#
+$CMP 12505WR-02
+D Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F .\Dataseets\12505-NN.pdf
+$ENDCMP
+#
+$CMP 12505WS-08
+D Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F .\Dataseets\12505-NN.pdf
+$ENDCMP
+#
+$CMP 12505WS-09
+D Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F .\Dataseets\12505-NN.pdf
+$ENDCMP
+#
+$CMP 1615RGBC
+D RGB LED, anode/red/green/blue
+K LED RGB diode
+F .\Dataseets\1615RGBC.doc
+$ENDCMP
+#
+$CMP 2N5401S
+D PNP transistor, base/emitter/collector
+K transistor PNP
+F .\Dataseets\2N5401S.pdf
+$ENDCMP
+#
+$CMP 2N5551S
+D NPN transistor, base/emitter/collector
+K transistor NPN
+F .\Dataseets\2N5550_1S_Ver2.pdf
+$ENDCMP
+#
+$CMP 2SA1981SY
+D PNP transistor, base/emitter/collector
+K transistor PNP
+F .\Dataseets\AUKCS02423-1.pdf
+$ENDCMP
+#
+$CMP AP4890
+F .\Dataseets\aP4890K_DataSheet.pdf
+$ENDCMP
+#
+$CMP BL-HBHG8JE36K-TRB-T05
+D RGB LED, anode/red/green/blue
+K LED RGB diode
+F .\Dataseets\BL-HBHG8JE36K-TRB-T05(3color).pdf
+$ENDCMP
+#
+$CMP CAP_0.8pF_1005
+K Cap Capacitor 1005
+F .\Dataseets\Replacement\2007221003_Murata-Electronics-GRM1555C1HR80WA01D_C162138.pdf
+$ENDCMP
+#
+$CMP CAP_100nF_1005
+K Cap Capacitor 1005
+F .\Dataseets\Replacement\CL05A104KA5NNN_Specsheet.pdf
+$ENDCMP
+#
+$CMP CAP_101K_250V_2012
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_103K_250V_3216
+K Cap Capacitor 1608
+F .\Dataseets\TCC1206X7R103K251DT_10nF_250V_K.pdf
+$ENDCMP
+#
+$CMP CAP_103K_25V_1608
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_104Z_25V_1608
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_105K_250V_4532
+K Cap Capacitor 1608
+F .\Dataseets\FS43X105K251EGG_1uF_250V_K.pdf
+$ENDCMP
+#
+$CMP CAP_105Z_6.3V_1608
+K Cap Capacitor 1608
+F ~
+$ENDCMP
+#
+$CMP CAP_12pF_1005
+K Cap Capacitor 1005
+F .\Dataseets\Replacement\2002241431_Walsin-Tech-Corp-0402N120G250CT_C458856.pdf
+$ENDCMP
+#
+$CMP CAP_1uF_1005
+K Cap Capacitor 1005
+F .\Dataseets\Replacement\CL05A105KA5NQN_Specsheet.pdf
+$ENDCMP
+#
+$CMP CAP_220uF_6.3V_SC6.3X5.8
+D Polarized capacitor, small US symbol
+K cap capacitor
+F .\Dataseets\good-pdf-3369557-1.pdf
+$ENDCMP
+#
+$CMP CAP_4.7uF_1005
+K Cap Capacitor 1005
+F .\Dataseets\Replacement\CL05A475KP5NRN_Specsheet.pdf
+$ENDCMP
+#
+$CMP CAP_N.C_1005
+K Cap Capacitor 1005
+F ~
+$ENDCMP
+#
+$CMP CastellatedPinHeader1.27mm_12
+D Generic connector, single row, 01x12, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP CastellatedPinHeader1.27mm_14
+D Generic connector, single row, 01x14, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP FDT86246L
+D N-MOSFET transistor, gate/drain/source
+K transistor NMOS N-MOS N-MOSFET
+F .\Dataseets\FDT86246L-D.pdf
+$ENDCMP
+#
+$CMP LMT117-ADJ
+D 1A Low Dropout regulator, positive, adjustable output, SOT-223
+K linear regulator ldo adjustable positive obsolete
+F .\Dataseets\AX1117_LMT117-ADJ.pdf
+$ENDCMP
+#
+$CMP L_10uH
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\Replacement\0900766b813f32d0.pdf
+$ENDCMP
+#
+$CMP L_15nH
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\Replacement\0900766b8090d53b.pdf
+$ENDCMP
+#
+$CMP L_3.9nH
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\Replacement\JELF243B-0010.pdf
+$ENDCMP
+#
+$CMP MBRAF3200T3G
+D 20V 1A Schottky Barrier Rectifier Diode, SMA(DO-214AC)
+K diode Schottky
+F .\Dataseets\MBRAF3200T3_D-2315037.pdf
+$ENDCMP
+#
+$CMP PATTERN_ANT_FR4_0.8T
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\001-91445_AN91445_Antenna_Design_and_RF_Layout_Guidelines.pdf
+$ENDCMP
+#
+$CMP PATTERN_ANT_FR4_1.6T
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\001-91445_AN91445_Antenna_Design_and_RF_Layout_Guidelines.pdf
+$ENDCMP
+#
+$CMP PinHeader1.27mm_14
+D Generic connector, single row, 01x14, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP PinHeader2.54mm-2-Jumper
+D Jumper, normally closed
+K jumper bridge link NC
+F ~
+$ENDCMP
+#
+$CMP PinHeader2.54mm_2
+D Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP PinHeader2.54mm_5
+D Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP PinHeader2.54mm_6
+D Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP PinHeader2.54mm_7
+D Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP PinHeader2.54mm_8
+D Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP R_0RJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_0RJ_6432
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_100KJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_100RJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_10KJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_120RJ_3216
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_150KF_2012
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_1KF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_2.7KF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_22KJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_270RF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_390RJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_4.7KF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_47RJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_510RF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_8.2KF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_NC
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP SC7850D-221K
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\20060601164525.pdf
+$ENDCMP
+#
+$CMP SMBJ15A
+D Bidirectional transient-voltage-suppression diode, filled shape
+K diode TVS thyrector
+F .\Dataseets\SMBJ.pdf
+$ENDCMP
+#
+$CMP STM32G070RBT6
+D ARM Cortex-M0 MCU, 128KB flash, 16KB RAM, 48MHz, 2.4-3.6V, 51 GPIO, LQFP-64
+F http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00141386.pdf
+$ENDCMP
+#
+$CMP SW_Push
+D Push button switch, generic, two pins
+K switch normally-open pushbutton push-button
+F ~
+$ENDCMP
+#
+$CMP SW_Tact_1105
+D Push button switch, generic, two pins
+K switch normally-open pushbutton push-button
+F https://www.devicemart.co.kr/goods/view?no=34555
+$ENDCMP
+#
+$CMP ULN2003D1013TR
+D IC PWR RELAY 7NPN 1:1 16SO
+K 497-2345-1-ND
+F http://www.st.com/content/ccc/resource/technical/document/datasheet/f3/6e/c8/64/4d/b3/4e/38/CD00001244.pdf/files/CD00001244.pdf/jcr:content/translations/en.CD00001244.pdf
+$ENDCMP
+#
+$CMP USB-TYPE-C-31-M-17
+D USB 2.0-only Type-C Plug connector
+K usb universal serial bus type-C USB2.0
+F .\Dataseets\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf
+$ENDCMP
+#
+$CMP VLN1MM04S8X
+F .\Dataseets\VLN1MxxS V1.40 series Data Sheet.pdf
+$ENDCMP
+#
+$CMP W25Q32JVSS
+D 32Mb Serial Flash Memory, Standard/Dual/Quad SPI, SOIC-8
+K flash memory SPI
+F http://www.winbond.com/resource-files/w25q32jv%20revg%2003272018%20plus.pdf
+$ENDCMP
+#
+$CMP WR106SR-W
+D Light emitting diode
+K LED diode
+F .\Dataseets\WR106SR-W.pdf
+$ENDCMP
+#
+$CMP Y_32MHz
+D Two pin crystal
+K quartz ceramic resonator oscillator
+F .\Dataseets\Replacement\2103291134_Yangxing-Tech-X201632MKD4SI_C108165.pdf
+$ENDCMP
+#
+$CMP nRF52810_PLE52M
+D Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-48
+K MCU, ARM, BLE, 2.4GHz
+F .\Dataseets\DATASHEET_PLE-52M_ver.1.5.pdf
+$ENDCMP
+#
+$CMP nRF52832-QFAA
+D Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-48
+K MCU, ARM, BLE, 2.4GHz
+F http://infocenter.nordicsemi.com/pdf/nRF52832_PS_v1.4.pdf
+$ENDCMP
+#
+$CMP nRF52832_DM-SModule
+D Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-48
+K MCU, ARM, BLE, 2.4GHz
+F http://infocenter.nordicsemi.com/pdf/nRF52832_DM-S_REV1R2.pdf
+$ENDCMP
+#
+#End Doc Library
