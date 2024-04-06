@@ -394,8 +394,8 @@ P 1950 5500
 F 0 "D13" H 2000 5725 50  0000 C CNN
 F 1 "SS14" H 2000 5634 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 2150 5700 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 2150 5800 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 2150 6400 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 2150 5800 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 2150 6400 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 2150 6500 60  0001 L CNN "Description"
 	1    1950 5500
 	-1   0    0    -1  
@@ -422,8 +422,8 @@ P 3050 5500
 F 0 "D14" H 3100 5725 50  0000 C CNN
 F 1 "SS14" H 3100 5634 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 3250 5700 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 3250 5800 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 3250 6400 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 3250 5800 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 3250 6400 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 3250 6500 60  0001 L CNN "Description"
 	1    3050 5500
 	-1   0    0    -1  
@@ -450,8 +450,8 @@ P 4150 5500
 F 0 "D15" H 4200 5725 50  0000 C CNN
 F 1 "SS14" H 4200 5634 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 4350 5700 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 4350 5800 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 4350 6400 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 4350 5800 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 4350 6400 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 4350 6500 60  0001 L CNN "Description"
 	1    4150 5500
 	-1   0    0    -1  
@@ -525,8 +525,8 @@ P 1950 6100
 F 0 "D9" H 2000 6325 50  0000 C CNN
 F 1 "SS14" H 2000 6234 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 2150 6300 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 2150 6400 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 2150 7000 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 2150 6400 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 2150 7000 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 2150 7100 60  0001 L CNN "Description"
 	1    1950 6100
 	-1   0    0    -1  
@@ -553,8 +553,8 @@ P 3050 6100
 F 0 "D10" H 3100 6325 50  0000 C CNN
 F 1 "SS14" H 3100 6234 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 3250 6300 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 3250 6400 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 3250 7000 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 3250 6400 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 3250 7000 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 3250 7100 60  0001 L CNN "Description"
 	1    3050 6100
 	-1   0    0    -1  
@@ -581,8 +581,8 @@ P 4150 6100
 F 0 "D11" H 4200 6325 50  0000 C CNN
 F 1 "SS14" H 4200 6234 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 4350 6300 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 4350 6400 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 4350 7000 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 4350 6400 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 4350 7000 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 4350 7100 60  0001 L CNN "Description"
 	1    4150 6100
 	-1   0    0    -1  
@@ -650,8 +650,8 @@ P 1950 6700
 F 0 "D5" H 2000 6925 50  0000 C CNN
 F 1 "SS14" H 2000 6834 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 2150 6900 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 2150 7000 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 2150 7600 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 2150 7000 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 2150 7600 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 2150 7700 60  0001 L CNN "Description"
 	1    1950 6700
 	-1   0    0    -1  
@@ -678,8 +678,8 @@ P 3050 6700
 F 0 "D6" H 3100 6925 50  0000 C CNN
 F 1 "SS14" H 3100 6834 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 3250 6900 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 3250 7000 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 3250 7600 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 3250 7000 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 3250 7600 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 3250 7700 60  0001 L CNN "Description"
 	1    3050 6700
 	-1   0    0    -1  
@@ -706,8 +706,8 @@ P 4150 6700
 F 0 "D7" H 4200 6925 50  0000 C CNN
 F 1 "SS14" H 4200 6834 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 4350 6900 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 4350 7000 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 4350 7600 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 4350 7000 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 4350 7600 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 4350 7700 60  0001 L CNN "Description"
 	1    4150 6700
 	-1   0    0    -1  
@@ -775,8 +775,8 @@ P 1950 7300
 F 0 "D1" H 2000 7525 50  0000 C CNN
 F 1 "SS14" H 2000 7434 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 2150 7500 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 2150 7600 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 2150 8200 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 2150 7600 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 2150 8200 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 2150 8300 60  0001 L CNN "Description"
 	1    1950 7300
 	-1   0    0    -1  
@@ -803,8 +803,8 @@ P 3050 7300
 F 0 "D2" H 3100 7525 50  0000 C CNN
 F 1 "SS14" H 3100 7434 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 3250 7500 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 3250 7600 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 3250 8200 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 3250 7600 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 3250 8200 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 3250 8300 60  0001 L CNN "Description"
 	1    3050 7300
 	-1   0    0    -1  
@@ -831,8 +831,8 @@ P 4150 7300
 F 0 "D3" H 4200 7525 50  0000 C CNN
 F 1 "SS14" H 4200 7434 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 4350 7500 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 4350 7600 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 4350 8200 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 4350 7600 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 4350 8200 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 4350 8300 60  0001 L CNN "Description"
 	1    4150 7300
 	-1   0    0    -1  
@@ -919,8 +919,8 @@ P 5250 5500
 F 0 "D16" H 5300 5725 50  0000 C CNN
 F 1 "SS14" H 5300 5634 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 5450 5700 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 5450 5800 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 5450 6400 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 5450 5800 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 5450 6400 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 5450 6500 60  0001 L CNN "Description"
 	1    5250 5500
 	-1   0    0    -1  
@@ -960,8 +960,8 @@ P 5250 6100
 F 0 "D12" H 5300 6325 50  0000 C CNN
 F 1 "SS14" H 5300 6234 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 5450 6300 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 5450 6400 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 5450 7000 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 5450 6400 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 5450 7000 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 5450 7100 60  0001 L CNN "Description"
 	1    5250 6100
 	-1   0    0    -1  
@@ -999,8 +999,8 @@ P 5250 6700
 F 0 "D8" H 5300 6925 50  0000 C CNN
 F 1 "SS14" H 5300 6834 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 5450 6900 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 5450 7000 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 5450 7600 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 5450 7000 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 5450 7600 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 5450 7700 60  0001 L CNN "Description"
 	1    5250 6700
 	-1   0    0    -1  
@@ -1038,8 +1038,8 @@ P 5250 7300
 F 0 "D4" H 5300 7525 50  0000 C CNN
 F 1 "SS14" H 5300 7434 50  0000 C CNN
 F 2 "digikey-footprints:DO-214AC" H 5450 7500 60  0001 L CNN
-F 3 ".\\Dataseets\\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf" H 5450 7600 60  0001 L CNN
-F 4 "https://www.devicemart.co.kr/order/cart" H 5450 8200 60  0001 L CNN "Shop"
+F 3 ".\\Dataseets\\SS12~SS110.pdf" H 5450 7600 60  0001 L CNN
+F 4 "https://www.devicemart.co.kr/goods/view?no=11911" H 5450 8200 60  0001 L CNN "Shop"
 F 5 "DIODE SCHOTTKY 40V 1A SMA" H 5450 8300 60  0001 L CNN "Description"
 	1    5250 7300
 	-1   0    0    -1  

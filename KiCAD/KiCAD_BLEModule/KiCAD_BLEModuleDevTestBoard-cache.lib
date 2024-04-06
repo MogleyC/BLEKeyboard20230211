@@ -408,7 +408,7 @@ F0 "D" 50 100 50 H V C CNN
 F1 "Custom_SS14" 50 -100 50 H V C CNN
 F2 "digikey-footprints:DO-214AC" 200 200 60 H I L CNN
 F3 "" 200 300 60 H I L CNN
-F4 "https://www.devicemart.co.kr/order/cart" 200 900 60 H I L CNN "Shop"
+F4 "https://www.devicemart.co.kr/goods/view?no=11911" 200 900 60 H I L CNN "Shop"
 F5 "DIODE SCHOTTKY 40V 1A SMA" 200 1000 60 H I L CNN "Description"
 DRAW
 P 2 0 1 0 0 0 100 0 N
