@@ -67,6 +67,10 @@ K LED RGB diode
 F .\Dataseets\BL-HBHG8JE36K-TRB-T05(3color).pdf
 $ENDCMP
 #
+$CMP BLEModule
+F http://infocenter.nordicsemi.com/pdf/nRF52832_PS_v1.4.pdf
+$ENDCMP
+#
 $CMP CAP_0.8pF_1005
 K Cap Capacitor 1005
 F .\Dataseets\Replacement\2007221003_Murata-Electronics-GRM1555C1HR80WA01D_C162138.pdf
@@ -148,6 +152,18 @@ K transistor NMOS N-MOS N-MOSFET
 F .\Dataseets\FDT86246L-D.pdf
 $ENDCMP
 #
+$CMP LED_1608_B
+D Light emitting diode
+K LED diode
+F .\Dataseets\FC-DA1608HRK-620D.pdf
+$ENDCMP
+#
+$CMP LED_1608_R
+D Light emitting diode
+K LED diode
+F .\Dataseets\FC-DA1608HRK-620D.pdf
+$ENDCMP
+#
 $CMP LMT117-ADJ
 D 1A Low Dropout regulator, positive, adjustable output, SOT-223
 K linear regulator ldo adjustable positive obsolete
@@ -204,6 +220,12 @@ $ENDCMP
 #
 $CMP PinHeader2.54mm_2
 D Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP PinHeader2.54mm_2x16
+D Generic connector, double row, 02x16, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)
 K connector
 F ~
 $ENDCMP
@@ -344,6 +366,12 @@ $CMP SMBJ15A
 D Bidirectional transient-voltage-suppression diode, filled shape
 K diode TVS thyrector
 F .\Dataseets\SMBJ.pdf
+$ENDCMP
+#
+$CMP SS14
+D DIODE SCHOTTKY 40V 1A SMA
+K SS14CT-ND
+F .\Dataseets\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf
 $ENDCMP
 #
 $CMP STM32G070RBT6
