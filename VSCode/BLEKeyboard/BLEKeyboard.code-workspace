@@ -7,5 +7,10 @@
 			"path": "../boardLayout"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"gpio.h": "c",
+			"log.h": "c"
+		}
+	}
 }
