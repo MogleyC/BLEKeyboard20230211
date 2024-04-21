@@ -24,26 +24,30 @@ int main(void)
 		printk("[gpio_init] failed\n");
 		return -1;
 	}
+	
+	ret = gpio_thread_start();
+	if (ret < 0)
+	{
+		printk("[gpio_thread_start] failed\n");
+		return -1;
+	}
 
-	// if (BleHID_init() < 0)
-	// {
-	// 	printk("[BleHID_update] failed\n");
-	// 	return -1;
-	// }
+
 
 	while (1)
 	{
-		ret = gpio_update();
-		if(ret < 0)
-		{
-			printk("[gpio_update] failed\n");
-			return -1;
-		}
+		// ret = gpio_update();
+		// if(ret < 0)
+		// {
+		// 	printk("[gpio_update] failed\n");
+		// 	return -1;
+		// }
 		// if(BleHID_update() < 0)
 		// {
 		// 	printk("[BleHID_update] failed\n");
 		// 	return -1;
 		// }
+		k_msleep(1000);
 	}
 	return 0;
 }
