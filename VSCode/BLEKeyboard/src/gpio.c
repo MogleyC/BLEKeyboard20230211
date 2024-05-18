@@ -6,10 +6,10 @@
 LOG_MODULE_DECLARE(my_module);
 
 // for thread
-K_THREAD_STACK_DEFINE(thread_stack_area_0, 256);
-K_THREAD_STACK_DEFINE(thread_stack_area_1, 512);
-static struct k_thread thread_data_0;
-static struct k_thread thread_data_1;
+K_THREAD_STACK_DEFINE(thread_stack_area_gpio_0, 256);
+K_THREAD_STACK_DEFINE(thread_stack_area_gpio_1, 512);
+static struct k_thread thread_data_gpio_0;
+static struct k_thread thread_data_gpio_1;
 
 
 #define gpio_set gpio_pin_set_dt
@@ -144,7 +144,7 @@ static void thread_KeyUpdate(void *arg1, void *arg2, void *arg3)
 			return;
 		k_msleep(1);
 
-		printk("btnsens [%d] %d %d %d %d\n", arrIdx, gpio_get(&btnsens[0]), gpio_get(&btnsens[1]), gpio_get(&btnsens[2]), gpio_get(&btnsens[3]));
+		//printk("btnsens [%d] %d %d %d %d\n", arrIdx, gpio_get(&btnsens[0]), gpio_get(&btnsens[1]), gpio_get(&btnsens[2]), gpio_get(&btnsens[3]));
 		k_msleep(1);
 		ret = gpio_set(&btnpwr[arrIdx], 0);
 		if (ret < 0)
@@ -157,20 +157,20 @@ static void thread_KeyUpdate(void *arg1, void *arg2, void *arg3)
 
 int gpio_thread_start(void)
 {
-	k_thread_create(&thread_data_0, thread_stack_area_0,
-					K_THREAD_STACK_SIZEOF(thread_stack_area_0),
+	k_thread_create(&thread_data_gpio_0, thread_stack_area_gpio_0,
+					K_THREAD_STACK_SIZEOF(thread_stack_area_gpio_0),
 					thread_LedUpdate,
 					NULL, NULL, NULL,
 					7, 0, K_NO_WAIT);
 					
-	k_thread_create(&thread_data_1, thread_stack_area_1,
-					K_THREAD_STACK_SIZEOF(thread_stack_area_1),
+	k_thread_create(&thread_data_gpio_1, thread_stack_area_gpio_1,
+					K_THREAD_STACK_SIZEOF(thread_stack_area_gpio_1),
 					thread_KeyUpdate,
 					NULL, NULL, NULL,
 					3, 0, K_NO_WAIT);
 
-    k_thread_start(&thread_data_0);
-    k_thread_start(&thread_data_1);
+    k_thread_start(&thread_data_gpio_0);
+    k_thread_start(&thread_data_gpio_1);
 
 	return 0;
 }

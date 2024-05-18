@@ -1,6 +1,10 @@
 # Copyright (c) 2024 Nordic Semiconductor ASA
 # SPDX-License-Identifier: Apache-2.0
 
+# Kconfig 검색 사이트
+# https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/kconfig/index.html#
+# https://docs.zephyrproject.org/latest/kconfig.html
+
 CONFIG_SOC_SERIES_NRF52X=y
 CONFIG_SOC_NRF52832_QFAA=y
 CONFIG_BOARD_BLEKEYBOARD_NRF52832=y
@@ -21,8 +25,8 @@ CONFIG_USE_SEGGER_RTT=y
 # Enable GPIO
 CONFIG_GPIO=y
 
-# Dissable nfc for GPIO 9,10 
-CONFIG_NFCT_PINS_AS_GPIOS=y
+# Dissable nfc for GPIO 9,10
+# CONFIG_NFCT_PINS_AS_GPIOS=y # is [DEPRECATED]. set "&uicr { nfct-pins-as-gpios; };" in .dts
 
 # Enable uart driver
 CONFIG_SERIAL=y
@@ -32,6 +36,6 @@ CONFIG_CONSOLE=y
 CONFIG_UART_CONSOLE=y
 
 # Addtional board options
-CONFIG_GPIO_AS_PINRESET=y
+# CONFIG_GPIO_AS_PINRESET=y # is [DEPRECATED]. set "&uicr { gpio-as-nreset; };" in .dts
 
 CONFIG_PINCTRL=y

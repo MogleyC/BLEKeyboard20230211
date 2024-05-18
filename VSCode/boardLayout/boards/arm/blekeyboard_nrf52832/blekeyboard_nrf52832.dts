@@ -123,3 +123,10 @@
 &clock {
 	status = "okay";
 };
+
+&uicr {
+	// Dissable nfc for GPIO 9,10
+    nfct-pins-as-gpios;
+	// Dissable reset for GPIO 21
+	gpio-as-nreset;
+};
