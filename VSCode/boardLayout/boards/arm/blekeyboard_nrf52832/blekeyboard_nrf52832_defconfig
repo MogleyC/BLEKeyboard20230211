@@ -1,7 +1,7 @@
 # Copyright (c) 2024 Nordic Semiconductor ASA
 # SPDX-License-Identifier: Apache-2.0
 
-# Kconfig 검색 사이트
+# Kconfig Define Check Site
 # https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/kconfig/index.html#
 # https://docs.zephyrproject.org/latest/kconfig.html
 

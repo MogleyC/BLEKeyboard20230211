@@ -182,7 +182,7 @@ K_MSGQ_DEFINE(mitm_queue,
 			  CONFIG_BT_HIDS_MAX_CLIENT_COUNT,
 			  4);
 
-// static void setPairingConfirm(bool accept);
+static void setPairingConfirm(bool accept);
 
 static void advertising_start(void)
 {
@@ -547,40 +547,49 @@ static void hid_init(void)
 	__ASSERT(err == 0, "HIDS initialization failed\n");
 }
 
-// /// @brief 페어링인증 중 유저에게 패스키 확인 요청
-// /// @param conn 페어링 요청한 기기 정보
-// /// @param passkey 페어링 요청 키
-// static void auth_passkey_confirm(struct bt_conn *conn, unsigned int passkey)
-// {
-// 	int err;
+static void auth_passkey_display(struct bt_conn *conn, unsigned int passkey)
+{
+	char addr[BT_ADDR_LE_STR_LEN];
 
-// 	struct pairing_data_mitm pairing_data;
+	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+
+	printk("Passkey for %s: %06u\n", addr, passkey);
+}
+
+/// @brief 페어링인증 중 유저에게 패스키 확인 요청
+/// @param conn 페어링 요청한 기기 정보
+/// @param passkey 페어링 요청 키
+static void auth_passkey_confirm(struct bt_conn *conn, unsigned int passkey)
+{
+	int err;
+
+	struct pairing_data_mitm pairing_data;
 	
-// 	pairing_data.conn = bt_conn_ref(conn);		// 불루투스 연결객체의 참조 카운트를 증가 (pairing_data.conn == conn 같은 주소값이다.)
-// 	pairing_data.passkey = passkey;				// passkey를 프린트할때 사용한다.
+	pairing_data.conn = bt_conn_ref(conn);		// 불루투스 연결객체의 참조 카운트를 증가 (pairing_data.conn == conn 같은 주소값이다.)
+	pairing_data.passkey = passkey;				// passkey를 프린트할때 사용한다.
 
-// 	// 페어링 요청 정보를 mitm_queue에 저장
-// 	// mitm_queue의 size만큼만 저장된다.(defualt = 1 = CONFIG_BT_HIDS_MAX_CLIENT_COUNT)
-// 	err = k_msgq_put(&mitm_queue, &pairing_data, K_NO_WAIT);
-// 	if (err)
-// 	{
-// 		printk("Pairing queue is full. Purge previous data.\n");
-// 	}
+	// 페어링 요청 정보를 mitm_queue에 저장
+	// mitm_queue의 size만큼만 저장된다.(defualt = 1 = CONFIG_BT_HIDS_MAX_CLIENT_COUNT)
+	err = k_msgq_put(&mitm_queue, &pairing_data, K_NO_WAIT);
+	if (err)
+	{
+		printk("Pairing queue is full. Purge previous data.\n");
+	}
 
-// 	// 현재 받은 정보로 요청을 수락한다.
-// 	// (즉, 제일 먼저 온 기기에 대해 곧바로 수락한다.)
-// 	// (요청 수락을 선택적으로 하려면 이 부분의 수정이 필요하다.)
-// 	setPairingConfirm(true);
-// }
+	// 현재 받은 정보로 요청을 수락한다.
+	// (즉, 제일 먼저 온 기기에 대해 곧바로 수락한다.)
+	// (요청 수락을 선택적으로 하려면 이 부분의 수정이 필요하다.)
+	setPairingConfirm(true);
+}
 
-// /// @brief 취소된 장치의 주소를 받아 터미널에 출력한다.
-// /// @param conn 
-// static void auth_cancel(struct bt_conn *conn)
-// {
-// 	char addr[BT_ADDR_LE_STR_LEN];
-// 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-// 	printk("Pairing cancelled: %s\n", addr);
-// }
+/// @brief 취소된 장치의 주소를 받아 터미널에 출력한다.
+/// @param conn 
+static void auth_cancel(struct bt_conn *conn)
+{
+	char addr[BT_ADDR_LE_STR_LEN];
+	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+	printk("Pairing cancelled: %s\n", addr);
+}
 
 // #if CONFIG_NFC_OOB_PAIRING
 // static void auth_oob_data_request(struct bt_conn *conn,
@@ -616,47 +625,48 @@ static void hid_init(void)
 // }
 // #endif
 
-// static void pairing_complete(struct bt_conn *conn, bool bonded)
-// {
-// 	char addr[BT_ADDR_LE_STR_LEN];
+static void pairing_complete(struct bt_conn *conn, bool bonded)
+{
+	char addr[BT_ADDR_LE_STR_LEN];
 
-// 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
 
-// 	printk("Pairing completed: %s, bonded: %d\n", addr, bonded);
-// }
+	printk("Pairing completed: %s, bonded: %d\n", addr, bonded);
+}
 
-// static void pairing_failed(struct bt_conn *conn, enum bt_security_err reason)
-// {
-// 	char addr[BT_ADDR_LE_STR_LEN];
-// 	struct pairing_data_mitm pairing_data;
+static void pairing_failed(struct bt_conn *conn, enum bt_security_err reason)
+{
+	char addr[BT_ADDR_LE_STR_LEN];
+	struct pairing_data_mitm pairing_data;
 
-// 	if (k_msgq_peek(&mitm_queue, &pairing_data) != 0)
-// 	{
-// 		return;
-// 	}
+	if (k_msgq_peek(&mitm_queue, &pairing_data) != 0)
+	{
+		return;
+	}
 
-// 	if (pairing_data.conn == conn)
-// 	{
-// 		bt_conn_unref(pairing_data.conn);
-// 		k_msgq_get(&mitm_queue, &pairing_data, K_NO_WAIT);
-// 	}
+	if (pairing_data.conn == conn)
+	{
+		bt_conn_unref(pairing_data.conn);
+		k_msgq_get(&mitm_queue, &pairing_data, K_NO_WAIT);
+	}
 
-// 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
 
-// 	printk("Pairing failed conn: %s, reason %d\n", addr, reason);
-// }
+	printk("Pairing failed conn: %s, reason %d\n", addr, reason);
+}
 
-// static struct bt_conn_auth_cb conn_auth_callbacks = {
-// 	.passkey_confirm = auth_passkey_confirm,
-// 	.cancel = auth_cancel,
-// #if CONFIG_NFC_OOB_PAIRING
-// 	.oob_data_request = auth_oob_data_request,
-// #endif
-// };
+static struct bt_conn_auth_cb conn_auth_callbacks = {
+	.passkey_display = auth_passkey_display,
+	.passkey_confirm = auth_passkey_confirm,
+	.cancel = auth_cancel,
+#if CONFIG_NFC_OOB_PAIRING
+	.oob_data_request = auth_oob_data_request,
+#endif
+};
 
-// static struct bt_conn_auth_info_cb conn_auth_info_callbacks = {
-// 	.pairing_complete = pairing_complete,
-// 	.pairing_failed = pairing_failed};
+static struct bt_conn_auth_info_cb conn_auth_info_callbacks = {
+	.pairing_complete = pairing_complete,
+	.pairing_failed = pairing_failed};
 
 // /** @brief Function process keyboard state and sends it
 //  *
@@ -868,35 +878,35 @@ static void hid_init(void)
 // 	}
 // }
 
-// /// @brief 인증을 수락/취소 한다.
-// /// @param accept 
-// static void setPairingConfirm(bool accept)
-// {
-// 	struct pairing_data_mitm pairing_data;
-// 	struct bt_conn *conn;
+/// @brief 인증을 수락/취소 한다.
+/// @param accept 
+static void setPairingConfirm(bool accept)
+{
+	struct pairing_data_mitm pairing_data;
+	struct bt_conn *conn;
 
-// 	// 인증관련정보(메시지)가 존재하는지 확인
-// 	if (k_msgq_get(&mitm_queue, &pairing_data, K_NO_WAIT) != 0)
-// 	{
-// 		return;
-// 	}
+	// 인증관련정보(메시지)가 존재하는지 확인
+	if (k_msgq_get(&mitm_queue, &pairing_data, K_NO_WAIT) != 0)
+	{
+		return;
+	}
 
-// 	conn = pairing_data.conn;
+	conn = pairing_data.conn;
 
-// 	if (accept)
-// 	{
-// 		bt_conn_auth_passkey_confirm(conn);
-// 		printk("Pairing Confirm accept, conn %p\n", conn);
-// 	}
-// 	else
-// 	{
-// 		bt_conn_auth_cancel(conn);
-// 		printk("Pairing Confirm Reject, conn %p\n", conn);
-// 	}
+	if (accept)
+	{
+		bt_conn_auth_passkey_confirm(conn);
+		printk("Pairing Confirm accept, conn %p\n", conn);
+	}
+	else
+	{
+		bt_conn_auth_cancel(conn);
+		printk("Pairing Confirm Reject, conn %p\n", conn);
+	}
 
-// 	// 불루투스 연결객체의 참조 카운트를 감소
-// 	bt_conn_unref(pairing_data.conn);
-// }
+	// 불루투스 연결객체의 참조 카운트를 감소
+	bt_conn_unref(pairing_data.conn);
+}
 
 // static void num_comp_reply(bool accept)
 // {
@@ -1038,8 +1048,8 @@ int bleHid_init(void)
 	int err;
 
 	// 페어링 보안인증 확인/시도/취소 콜백 등록 - null로 설정시 보안 설정 안함
-	//err = bt_conn_auth_cb_register(&conn_auth_callbacks);
-	err = bt_conn_auth_cb_register(NULL);
+	err = bt_conn_auth_cb_register(&conn_auth_callbacks);
+	// err = bt_conn_auth_cb_register(NULL);
 	if (err)
 	{
 		printk("Failed to register authorization callbacks.\n");
@@ -1047,12 +1057,12 @@ int bleHid_init(void)
 	}
 
 	// 페어링 보안인증 성공/실패 콜백 등록
-	// err = bt_conn_auth_info_cb_register(&conn_auth_info_callbacks);
-	// if (err)
-	// {
-	// 	printk("Failed to register authorization info callbacks.\n");
-	// 	return 0;
-	// }
+	err = bt_conn_auth_info_cb_register(&conn_auth_info_callbacks);
+	if (err)
+	{
+		printk("Failed to register authorization info callbacks.\n");
+		return 0;
+	}
 
 	// hid 프로토콜 설정
 	hid_init();
