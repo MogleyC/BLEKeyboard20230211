@@ -191,7 +191,7 @@ static void thread_KeyInputUpdate(void *arg1, void *arg2, void *arg3)
 					return;
 				}
 			}
-			k_msleep(1);
+			k_usleep(100);
 
 			// GPIO Input(키입력) 체크
 			{
@@ -211,7 +211,7 @@ static void thread_KeyInputUpdate(void *arg1, void *arg2, void *arg3)
 					return;
 				}
 			}
-			k_msleep(1);
+			k_usleep(100);
 
 			// GPIO 초기화
 			{
@@ -224,7 +224,7 @@ static void thread_KeyInputUpdate(void *arg1, void *arg2, void *arg3)
 			}
 
 			++callcnt;
-			k_msleep(48);
+			k_msleep(10);
 		}
 	}
 }

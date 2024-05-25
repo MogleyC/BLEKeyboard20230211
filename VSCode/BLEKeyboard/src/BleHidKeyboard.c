@@ -32,6 +32,7 @@
 #include <zephyr/bluetooth/services/dis.h>
 
 #include "gpio.h"
+#include "hid_usages.h"
 
 
 
@@ -160,13 +161,13 @@ static struct conn_mode
 
 //static const uint8_t shift_key[] = {225};
 
-// /* Current report status
-//  */
-// static struct keyboard_state
-// {
-// 	uint8_t ctrl_keys_state; /* Current keys state */
-// 	uint8_t keys_state[KEY_PRESS_MAX];
-// } hid_keyboard_state;
+/* Current report status
+ */
+static struct keyboard_state
+{
+	uint8_t ctrl_keys_state; /* Current keys state */
+	uint8_t keys_state[KEY_PRESS_MAX];
+} hid_keyboard_state;
 
 // #if CONFIG_NFC_OOB_PAIRING
 // static struct k_work adv_work;
@@ -183,6 +184,10 @@ K_MSGQ_DEFINE(mitm_queue,
 			  sizeof(struct pairing_data_mitm),
 			  CONFIG_BT_HIDS_MAX_CLIENT_COUNT,
 			  4);
+
+
+
+static bool isKeyPress[4][4] = {0};
 
 static void setPairingConfirm(bool accept);
 
@@ -384,6 +389,10 @@ BT_CONN_CB_DEFINE(conn_callbacks) = {
 	.security_changed = security_changed,
 };
 
+/**
+ * @brief CAPS_LOCK 상태를 표출
+ * 
+ */
 static void caps_lock_handler(const struct bt_hids_rep *rep)
 {
 	// uint8_t report_val = ((*rep->data) & OUTPUT_REPORT_BIT_MASK_CAPS_LOCK) ? 1 : 0;
@@ -407,6 +416,9 @@ static void hids_outp_rep_handler(struct bt_hids_rep *rep,
 	caps_lock_handler(rep);
 }
 
+/**
+ * @brief 부트모드에서 키보드 출력보고서 전송시 호출
+ */
 static void hids_boot_kb_outp_rep_handler(struct bt_hids_rep *rep,
 										  struct bt_conn *conn,
 										  bool write)
@@ -670,76 +682,86 @@ static struct bt_conn_auth_info_cb conn_auth_info_callbacks = {
 	.pairing_complete = pairing_complete,
 	.pairing_failed = pairing_failed};
 
-// /** @brief Function process keyboard state and sends it
-//  *
-//  *  @param pstate     The state to be sent
-//  *  @param boot_mode  Information if boot mode protocol is selected.
-//  *  @param conn       Connection handler
-//  *
-//  *  @return 0 on success or negative error code.
-//  */
-// static int key_report_con_send(const struct keyboard_state *state,
-// 							   bool boot_mode,
-// 							   struct bt_conn *conn)
-// {
-// 	int err = 0;
-// 	uint8_t data[INPUT_REPORT_KEYS_MAX_LEN];
-// 	uint8_t *key_data;
-// 	const uint8_t *key_state;
-// 	size_t n;
+/** @brief Function process keyboard state and sends it
+ *
+ *  @param pstate     The state to be sent
+ *  @param boot_mode  Information if boot mode protocol is selected.
+ *  @param conn       Connection handler
+ *
+ *  @return 0 on success or negative error code.
+ */
+static int key_report_con_send(const struct keyboard_state *state,
+							   bool boot_mode,
+							   struct bt_conn *conn)
+{
+	int err = 0;
+	uint8_t data[INPUT_REPORT_KEYS_MAX_LEN];
+	// uint8_t *key_data;
+	// const uint8_t *key_state;
+	// size_t n;
 
-// 	data[2] = 'a';
+	memset(data, 0, sizeof(data));
 
-// 	// data[0] = state->ctrl_keys_state;
-// 	// data[1] = 0;
-// 	// key_data = &data[2];
-// 	// key_state = state->keys_state;
+	if(isKeyPress[0][0])
+	{
+		data[2] = HID_KEY_1;
+		data[3] = HID_KEY_2;
+		data[4] = HID_KEY_3;
+		data[5] = HID_KEY_4;
+		data[6] = HID_KEY_5;
+		data[7] = HID_KEY_6;
+	}
 
-// 	// for (n = 0; n < KEY_PRESS_MAX; ++n)
-// 	// {
-// 	// 	*key_data++ = *key_state++;
-// 	// }
-// 	if (boot_mode)
-// 	{
-// 		err = bt_hids_boot_kb_inp_rep_send(&hids_obj, conn, data,
-// 										   sizeof(data), NULL);
-// 	}
-// 	else
-// 	{
-// 		err = bt_hids_inp_rep_send(&hids_obj, conn,
-// 								   INPUT_REP_KEYS_IDX, data,
-// 								   sizeof(data), NULL);
-// 	}
-// 	return err;
-// }
+	// data[0] = state->ctrl_keys_state;
+	// data[1] = 0;
+	// key_data = &data[2];
+	// key_state = state->keys_state;
 
-// /** @brief Function process and send keyboard state to all active connections
-//  *
-//  * Function process global keyboard state and send it to all connected
-//  * clients.
-//  *
-//  * @return 0 on success or negative error code.
-//  */
-// static int key_report_send(void)
-// {
-// 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++)
-// 	{
-// 		if (conn_mode[i].conn)
-// 		{
-// 			int err;
+	// for (n = 0; n < KEY_PRESS_MAX; ++n)
+	// {
+	// 	*key_data++ = *key_state++;
+	// }
+	if (boot_mode)
+	{
+		err = bt_hids_boot_kb_inp_rep_send(&hids_obj, conn, data,
+										   sizeof(data), NULL);
+	}
+	else
+	{
+		err = bt_hids_inp_rep_send(&hids_obj, conn,
+								   INPUT_REP_KEYS_IDX, data,
+								   sizeof(data), NULL);
+	}
+	return err;
+}
 
-// 			err = key_report_con_send(&hid_keyboard_state,
-// 									  conn_mode[i].in_boot_mode,
-// 									  conn_mode[i].conn);
-// 			if (err)
-// 			{
-// 				printk("Key report send error: %d\n", err);
-// 				return err;
-// 			}
-// 		}
-// 	}
-// 	return 0;
-// }
+/** @brief Function process and send keyboard state to all active connections
+ *
+ * Function process global keyboard state and send it to all connected
+ * clients.
+ *
+ * @return 0 on success or negative error code.
+ */
+static int key_report_send(void)
+{
+	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++)
+	{
+		if (conn_mode[i].conn)
+		{
+			int err;
+
+			err = key_report_con_send(&hid_keyboard_state,
+									  conn_mode[i].in_boot_mode,
+									  conn_mode[i].conn);
+			if (err)
+			{
+				printk("Key report send error: %d\n", err);
+				return err;
+			}
+		}
+	}
+	return 0;
+}
 
 // /** @brief Change key code to ctrl code mask
 //  *
@@ -1047,7 +1069,7 @@ int BleHID_update(void)
 	return 0;
 }
 
-static bool isKeyPress[4][4] = {0};
+static bool TestkeyStatusPrev = false;
 
 static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 {
@@ -1075,24 +1097,16 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 			memcpy(isKeyPress[msg_data.rowIdx], msg_data.colKeyInput, sizeof(isKeyPress[msg_data.rowIdx]));
 		}
 
-		for (int8_t i = 3; i >= 0; --i)
-		{
-			printk("[%d] %d %d %d %d\n", i, isKeyPress[i][0], isKeyPress[i][1], isKeyPress[i][2], isKeyPress[i][3]);
-		}
-
-		// if (conn_mode[i].conn)
+		// for (int8_t i = 3; i >= 0; --i)
 		// {
-		// 	int err;
-
-		// 	err = key_report_con_send(&hid_keyboard_state,
-		// 							  conn_mode[i].in_boot_mode,
-		// 							  conn_mode[i].conn);
-		// 	if (err)
-		// 	{
-		// 		printk("Key report send error: %d\n", err);
-		// 		return err;
-		// 	}
+		// 	printk("[%d] %d %d %d %d\n", i, isKeyPress[i][0], isKeyPress[i][1], isKeyPress[i][2], isKeyPress[i][3]);
 		// }
+		if(TestkeyStatusPrev != isKeyPress[0][0])
+		{
+			TestkeyStatusPrev = isKeyPress[0][0];
+			printk("[isKeyPress[0][0]] %d \n", isKeyPress[0][0]);
+			key_report_send();
+		}
 	}
 }
 
