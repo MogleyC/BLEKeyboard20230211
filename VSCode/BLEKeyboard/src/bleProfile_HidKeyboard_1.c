@@ -1,6 +1,6 @@
-#include "bleProfile_HidKeyboard_0.h"
+#include "bleProfile_HidKeyboard_1.h"
 
-#define HID_OBJ hids_obj_0
+#define HID_OBJ hids_obj_1
 
 /* HIDS instance. */
 BT_HIDS_DEF(HID_OBJ,
@@ -119,7 +119,7 @@ static int key_report_con_send(const struct keyboard_state *state,
 	// 일반 6키
 	// memcpy(&data[2], state->keys_state, KEY_PRESS_MAX);
 	if (state->keys_state[0] != KEY_NONE)
-		data[2] = HID_KEY_1;
+		data[2] = HID_KEY_2;
 
 	if (boot_mode)
 	{
@@ -132,10 +132,11 @@ static int key_report_con_send(const struct keyboard_state *state,
 								   INPUT_REP_KEYS_IDX, data,
 								   sizeof(data), NULL);
 	}
+
 	return err;
 }
 
-int hid_kb_0_init(void)
+int hid_kb_1_init(void)
 {
 	int err;
 	struct bt_hids_init_param hids_init_obj = {0};
@@ -224,7 +225,7 @@ int hid_kb_0_init(void)
 	return err;
 }
 
-int hid_kb_0_set_connected(struct bt_conn *conn)
+int hid_kb_1_set_connected(struct bt_conn *conn)
 {
 	int err = bt_hids_connected(&HID_OBJ, conn);
 
@@ -247,7 +248,7 @@ int hid_kb_0_set_connected(struct bt_conn *conn)
 	return err;
 }
 
-int hid_kb_0_set_disconnected(struct bt_conn *conn)
+int hid_kb_1_set_disconnected(struct bt_conn *conn)
 {
 	int err = bt_hids_disconnected(&HID_OBJ, conn);
 
@@ -275,7 +276,7 @@ int hid_kb_0_set_disconnected(struct bt_conn *conn)
  *
  * @return 0 on success or negative error code.
  */
-int hid_kb_0_key_report_send(const struct keyboard_state *state)
+int hid_kb_1_key_report_send(const struct keyboard_state *state)
 {
 	for (size_t i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++)
 	{

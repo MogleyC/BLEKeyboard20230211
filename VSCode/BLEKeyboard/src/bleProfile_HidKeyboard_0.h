@@ -4,8 +4,6 @@
 #include "include.h"
 #include "bleProfile_HidKeyboard_def.h"
 
-#define HID_OBJ hids_obj_0
-
 int hid_kb_0_init(void);
 int hid_kb_0_set_connected(struct bt_conn *conn);
 int hid_kb_0_set_disconnected(struct bt_conn *conn);

@@ -31,6 +31,7 @@
 #include "gpio.h"
 #include "hid_usages.h"
 #include "bleProfile_HidKeyboard_0.h"
+#include "bleProfile_HidKeyboard_1.h"
 
 
 
@@ -216,6 +217,7 @@ static void connected(struct bt_conn *conn, uint8_t err)
 	printk("Connected %s\n", addr);
 
 	err = hid_kb_0_set_connected(conn);
+	err = hid_kb_1_set_connected(conn);
 	
 	is_adv = false;
 }
@@ -230,6 +232,7 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 	printk("Disconnected from %s (reason %u)\n", addr, reason);
 
 	err = hid_kb_0_set_disconnected(conn);
+	err = hid_kb_1_set_disconnected(conn);
 
 // #if CONFIG_NFC_OOB_PAIRING
 // 	if (is_adv)
@@ -696,7 +699,7 @@ int BleHID_update(void)
 	return 0;
 }
 
-static bool TestkeyStatusPrev = false;
+static bool TestkeyStatusPrev[3];
 
 static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 {
@@ -728,9 +731,9 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 		// {
 		// 	printk("[%d] %d %d %d %d\n", i, isKeyPress[i][0], isKeyPress[i][1], isKeyPress[i][2], isKeyPress[i][3]);
 		// }
-		if(TestkeyStatusPrev != isKeyPress[0][0])
+		if(TestkeyStatusPrev[0] != isKeyPress[0][0])
 		{
-			TestkeyStatusPrev = isKeyPress[0][0];
+			TestkeyStatusPrev[0] = isKeyPress[0][0];
 			printk("[isKeyPress[0][0]] %d \n", isKeyPress[0][0]);
 			struct keyboard_state state;
 			memset(&state, 0, sizeof(struct keyboard_state));
@@ -739,6 +742,31 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 				state.keys_state[0] = HID_KEY_A;
 			}
 			hid_kb_0_key_report_send(&state);
+		}
+		if (TestkeyStatusPrev[1] != isKeyPress[0][1])
+		{
+			TestkeyStatusPrev[1] = isKeyPress[0][1];
+			printk("[isKeyPress[0][1]] %d \n", isKeyPress[0][1]);
+			struct keyboard_state state;
+			memset(&state, 0, sizeof(struct keyboard_state));
+			if (isKeyPress[0][1])
+			{
+				state.keys_state[0] = HID_KEY_B;
+			}
+			hid_kb_1_key_report_send(&state);
+		}
+		if (TestkeyStatusPrev[2] != isKeyPress[0][2])
+		{
+			TestkeyStatusPrev[2] = isKeyPress[0][2];
+			printk("[isKeyPress[0][2]] %d \n", isKeyPress[0][2]);
+			struct keyboard_state state;
+			memset(&state, 0, sizeof(struct keyboard_state));
+			if (isKeyPress[0][2])
+			{
+				state.keys_state[0] = HID_KEY_C;
+			}
+			hid_kb_0_key_report_send(&state);
+			hid_kb_1_key_report_send(&state);
 		}
 	}
 }
@@ -769,6 +797,13 @@ int bleHid_init(void)
 	if (err)
 	{
 		printk("hid_kb_0_init failed (err %d)\n", err);
+		return 0;
+	}
+
+	err = hid_kb_1_init();
+	if (err)
+	{
+		printk("hid_kb_1_init failed (err %d)\n", err);
 		return 0;
 	}
 

@@ -22,7 +22,8 @@
 			"bleprofile_hidkeyboard.h": "c",
 			"hid_usages.h": "c",
 			"xhash": "c",
-			"xutility": "c"
+			"xutility": "c",
+			"bleprofile_hidkeyboard_def.h": "c"
 		},
 		"nrf-connect.debugging.bindings": {
 			"${workspaceFolder}/build": "Launch build"
