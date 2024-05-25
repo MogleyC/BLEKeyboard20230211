@@ -13,7 +13,16 @@
 			"log.h": "c",
 			"kernel.h": "c",
 			"hci.h": "c",
-			"include.h": "c"
+			"include.h": "c",
+			"byteorder.h": "c",
+			"hids.h": "c",
+			"uuid.h": "c",
+			"dis.h": "c",
+			"bleprofile_hidkeyboard_0.h": "c",
+			"bleprofile_hidkeyboard.h": "c",
+			"hid_usages.h": "c",
+			"xhash": "c",
+			"xutility": "c"
 		},
 		"nrf-connect.debugging.bindings": {
 			"${workspaceFolder}/build": "Launch build"
