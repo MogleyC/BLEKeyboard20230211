@@ -31,15 +31,17 @@
 #include <bluetooth/services/hids.h>
 #include <zephyr/bluetooth/services/dis.h>
 
+#include "gpio.h"
+
 
 
 // for logging
 LOG_MODULE_DECLARE(my_module);
 
 // for thread
-// K_THREAD_STACK_DEFINE(thread_stack_area_blehid_0, 1024);
+K_THREAD_STACK_DEFINE(thread_stack_area_blehid_0, 1024);
 // K_THREAD_STACK_DEFINE(thread_stack_area_blehid_1, 1024);
-// static struct k_thread thread_data_blehid_0;
+static struct k_thread thread_data_blehid_0;
 // static struct k_thread thread_data_blehid_1;
 
 #define DEVICE_NAME     CONFIG_BT_DEVICE_NAME
@@ -686,15 +688,17 @@ static struct bt_conn_auth_info_cb conn_auth_info_callbacks = {
 // 	const uint8_t *key_state;
 // 	size_t n;
 
-// 	data[0] = state->ctrl_keys_state;
-// 	data[1] = 0;
-// 	key_data = &data[2];
-// 	key_state = state->keys_state;
+// 	data[2] = 'a';
 
-// 	for (n = 0; n < KEY_PRESS_MAX; ++n)
-// 	{
-// 		*key_data++ = *key_state++;
-// 	}
+// 	// data[0] = state->ctrl_keys_state;
+// 	// data[1] = 0;
+// 	// key_data = &data[2];
+// 	// key_state = state->keys_state;
+
+// 	// for (n = 0; n < KEY_PRESS_MAX; ++n)
+// 	// {
+// 	// 	*key_data++ = *key_state++;
+// 	// }
 // 	if (boot_mode)
 // 	{
 // 		err = bt_hids_boot_kb_inp_rep_send(&hids_obj, conn, data,
@@ -1043,6 +1047,55 @@ int BleHID_update(void)
 	return 0;
 }
 
+static bool isKeyPress[4][4] = {0};
+
+static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
+{
+    // arg1, arg2, arg3 사용하지 않음을 명시
+    (void)arg1;
+    (void)arg2;
+    (void)arg3;
+
+	int ret = 0;
+	struct k_msgq * key_status_msg_queue_ptr = get_key_status_msg_queue_ptr();
+
+	while (true)
+	{
+		memset(isKeyPress, 0, sizeof(isKeyPress));
+		for (int8_t i = 0; i < 4; i++)
+		{
+			// 메시지 수신
+			key_status_msg_data msg_data;
+			ret = k_msgq_get(key_status_msg_queue_ptr, &msg_data, K_FOREVER);
+			if (ret != SUCCESS)
+			{
+				printk("Err. [thread_keyCheck] k_msgq_get\n");
+				continue;
+			}
+			memcpy(isKeyPress[msg_data.rowIdx], msg_data.colKeyInput, sizeof(isKeyPress[msg_data.rowIdx]));
+		}
+
+		for (int8_t i = 3; i >= 0; --i)
+		{
+			printk("[%d] %d %d %d %d\n", i, isKeyPress[i][0], isKeyPress[i][1], isKeyPress[i][2], isKeyPress[i][3]);
+		}
+
+		// if (conn_mode[i].conn)
+		// {
+		// 	int err;
+
+		// 	err = key_report_con_send(&hid_keyboard_state,
+		// 							  conn_mode[i].in_boot_mode,
+		// 							  conn_mode[i].conn);
+		// 	if (err)
+		// 	{
+		// 		printk("Key report send error: %d\n", err);
+		// 		return err;
+		// 	}
+		// }
+	}
+}
+
 int bleHid_init(void)
 {
 	int err;
@@ -1098,11 +1151,11 @@ int bleHid_init(void)
 
 int bleHid_thread_start(void)
 {
-	// k_thread_create(&thread_data_blehid_0, thread_stack_area_blehid_0,
-	// 				K_THREAD_STACK_SIZEOF(thread_stack_area_blehid_0),
-	// 				thread_LedUpdate,
-	// 				NULL, NULL, NULL,
-	// 				7, 0, K_NO_WAIT);
+	k_thread_create(&thread_data_blehid_0, thread_stack_area_blehid_0,
+					K_THREAD_STACK_SIZEOF(thread_stack_area_blehid_0),
+					thread_keyCheck,
+					NULL, NULL, NULL,
+					7, 0, K_NO_WAIT);
 
 	// k_thread_create(&thread_data_blehid_1, thread_stack_area_blehid_1,
 	// 				K_THREAD_STACK_SIZEOF(thread_stack_area_blehid_1),
