@@ -40,31 +40,10 @@ LOG_MODULE_DECLARE(my_module);
 
 // for thread
 K_THREAD_STACK_DEFINE(thread_stack_area_blehid_0, 1024);
-// K_THREAD_STACK_DEFINE(thread_stack_area_blehid_1, 1024);
 static struct k_thread thread_data_blehid_0;
-// static struct k_thread thread_data_blehid_1;
 
 #define DEVICE_NAME     CONFIG_BT_DEVICE_NAME
 #define DEVICE_NAME_LEN (sizeof(DEVICE_NAME) - 1)
-
-
-
-// #define ADV_LED_BLINK_INTERVAL 1000
-
-// #define ADV_STATUS_LED DK_LED1
-// #define CON_STATUS_LED DK_LED2
-// #define LED_CAPS_LOCK DK_LED3
-// #define NFC_LED DK_LED4
-// #define KEY_TEXT_MASK DK_BTN1_MSK
-// #define KEY_SHIFT_MASK DK_BTN2_MSK
-// #define KEY_ADV_MASK DK_BTN4_MSK
-
-// /* Key used to accept or reject passkey value */
-// #define KEY_PAIRING_ACCEPT DK_BTN1_MSK
-// #define KEY_PAIRING_REJECT DK_BTN2_MSK
-
-// /* HIDs queue elements. */
-// #define HIDS_QUEUE_SIZE 10
 
 /* ********************* */
 
@@ -85,27 +64,6 @@ static const struct bt_data sd[] = {
 	BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
 };
 
-
-// static const uint8_t hello_world_str[] = {
-// 	0x0b, /* Key h */
-// 	0x08, /* Key e */
-// 	0x0f, /* Key l */
-// 	0x0f, /* Key l */
-// 	0x12, /* Key o */
-// 	0x28, /* Key Return */
-// };
-
-//static const uint8_t shift_key[] = {225};
-
-/* Current report status
- */
-
-
-// #if CONFIG_NFC_OOB_PAIRING
-// static struct k_work adv_work;
-// #endif
-
-// static struct k_work pairing_work;
 struct pairing_data_mitm
 {
 	struct bt_conn *conn;
@@ -157,56 +115,6 @@ static void advertising_start(void)
 	printk("Advertising successfully started\n");
 }
 
-// #if CONFIG_NFC_OOB_PAIRING
-// static void delayed_advertising_start(struct k_work *work)
-// {
-// 	advertising_start();
-// }
-
-// void nfc_field_detected(void)
-// {
-// 	dk_set_led_on(NFC_LED);
-
-// 	for (int i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++)
-// 	{
-// 		if (!conn_mode[i].conn)
-// 		{
-// 			k_work_submit(&adv_work);
-// 			break;
-// 		}
-// 	}
-// }
-
-// void nfc_field_lost(void)
-// {
-// 	dk_set_led_off(NFC_LED);
-// }
-// #endif
-
-// /// @brief 페어링을 요청 알림과 요청한 기기정보를 프린트한다.
-// /// @param work 
-// static void pairing_process(struct k_work *work)
-// {
-// 	int err;
-// 	struct pairing_data_mitm pairing_data;
-
-// 	char addr[BT_ADDR_LE_STR_LEN];
-
-// 	// mitm_queue에서 페어링할 디바이스의 정보를 받는다.
-// 	err = k_msgq_peek(&mitm_queue, &pairing_data);
-// 	if (err)
-// 	{
-// 		return;
-// 	}
-
-// 	// 페어링할 디바이스의 주소를 표기하고 버튼에 대한 정보가 나타난다.
-// 	bt_addr_le_to_str(bt_conn_get_dst(pairing_data.conn),
-// 					  addr, sizeof(addr));
-
-// 	printk("Passkey for %s: %06u\n", addr, pairing_data.passkey);
-// 	printk("Press Button 1 to confirm, Button 2 to reject.\n");
-// }
-
 static void connected(struct bt_conn *conn, uint8_t err)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
@@ -240,17 +148,8 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 	err = hid_kb_0_set_disconnected(conn);
 	err = hid_kb_1_set_disconnected(conn);
 
-// #if CONFIG_NFC_OOB_PAIRING
-// 	if (is_adv)
-// 	{
-// 		printk("Advertising stopped after disconnect\n");
-// 		bt_le_adv_stop();
-// 		is_adv = false;
-// 	}
-// #else
 	is_BLEConnected = false;
 	advertising_start();
-// #endif
 }
 
 static void security_changed(struct bt_conn *conn, bt_security_t level,
@@ -321,40 +220,6 @@ static void auth_cancel(struct bt_conn *conn)
 	printk("Pairing cancelled: %s\n", addr);
 }
 
-// #if CONFIG_NFC_OOB_PAIRING
-// static void auth_oob_data_request(struct bt_conn *conn,
-// 								  struct bt_conn_oob_info *info)
-// {
-// 	int err;
-// 	struct bt_le_oob *oob_local = app_nfc_oob_data_get();
-
-// 	printk("LESC OOB data requested\n");
-
-// 	if (info->type != BT_CONN_OOB_LE_SC)
-// 	{
-// 		printk("Only LESC pairing supported\n");
-// 		return;
-// 	}
-
-// 	if (info->lesc.oob_config != BT_CONN_OOB_LOCAL_ONLY)
-// 	{
-// 		printk("LESC OOB config not supported\n");
-// 		return;
-// 	}
-
-// 	/* Pass only local OOB data. */
-// 	err = bt_le_oob_set_sc_data(conn, &oob_local->le_sc_data, NULL);
-// 	if (err)
-// 	{
-// 		printk("Error while setting OOB data: %d\n", err);
-// 	}
-// 	else
-// 	{
-// 		printk("Successfully provided LESC OOB data\n");
-// 	}
-// }
-// #endif
-
 static void pairing_complete(struct bt_conn *conn, bool bonded)
 {
 	char addr[BT_ADDR_LE_STR_LEN];
@@ -398,149 +263,6 @@ static struct bt_conn_auth_info_cb conn_auth_info_callbacks = {
 	.pairing_complete = pairing_complete,
 	.pairing_failed = pairing_failed};
 
-
-
-// /** @brief Change key code to ctrl code mask
-//  *
-//  *  Function changes the key code to the mask in the control code
-//  *  field inside the raport.
-//  *  Returns 0 if key code is not a control key.
-//  *
-//  *  @param key Key code
-//  *
-//  *  @return Mask of the control key or 0.
-//  */
-// static uint8_t button_ctrl_code(uint8_t key)
-// {
-// 	if (KEY_CTRL_CODE_MIN <= key && key <= KEY_CTRL_CODE_MAX)
-// 	{
-// 		return (uint8_t)(1U << (key - KEY_CTRL_CODE_MIN));
-// 	}
-// 	return 0;
-// }
-
-// static int hid_kbd_state_key_set(uint8_t key)
-// {
-// 	uint8_t ctrl_mask = button_ctrl_code(key);
-
-// 	if (ctrl_mask)
-// 	{
-// 		hid_keyboard_state.ctrl_keys_state |= ctrl_mask;
-// 		return 0;
-// 	}
-// 	for (size_t i = 0; i < KEY_PRESS_MAX; ++i)
-// 	{
-// 		if (hid_keyboard_state.keys_state[i] == 0)
-// 		{
-// 			hid_keyboard_state.keys_state[i] = key;
-// 			return 0;
-// 		}
-// 	}
-// 	/* All slots busy */
-// 	return -EBUSY;
-// }
-
-// static int hid_kbd_state_key_clear(uint8_t key)
-// {
-// 	uint8_t ctrl_mask = button_ctrl_code(key);
-
-// 	if (ctrl_mask)
-// 	{
-// 		hid_keyboard_state.ctrl_keys_state &= ~ctrl_mask;
-// 		return 0;
-// 	}
-// 	for (size_t i = 0; i < KEY_PRESS_MAX; ++i)
-// 	{
-// 		if (hid_keyboard_state.keys_state[i] == key)
-// 		{
-// 			hid_keyboard_state.keys_state[i] = 0;
-// 			return 0;
-// 		}
-// 	}
-// 	/* Key not found */
-// 	return -EINVAL;
-// }
-
-// /** @brief Press a button and send report
-//  *
-//  *  @note Functions to manipulate hid state are not reentrant
-//  *  @param keys
-//  *  @param cnt
-//  *
-//  *  @return 0 on success or negative error code.
-//  */
-// static int hid_buttons_press(const uint8_t *keys, size_t cnt)
-// {
-// 	while (cnt--)
-// 	{
-// 		int err;
-
-// 		err = hid_kbd_state_key_set(*keys++);
-// 		if (err)
-// 		{
-// 			printk("Cannot set selected key.\n");
-// 			return err;
-// 		}
-// 	}
-
-// 	return key_report_send();
-// }
-
-// /** @brief Release the button and send report
-//  *
-//  *  @note Functions to manipulate hid state are not reentrant
-//  *  @param keys
-//  *  @param cnt
-//  *
-//  *  @return 0 on success or negative error code.
-//  */
-// static int hid_buttons_release(const uint8_t *keys, size_t cnt)
-// {
-// 	while (cnt--)
-// 	{
-// 		int err;
-
-// 		err = hid_kbd_state_key_clear(*keys++);
-// 		if (err)
-// 		{
-// 			printk("Cannot clear selected key.\n");
-// 			return err;
-// 		}
-// 	}
-
-// 	return key_report_send();
-// }
-
-// static void button_text_changed(bool down)
-// {
-// 	static const uint8_t *chr = hello_world_str;
-
-// 	if (down)
-// 	{
-// 		hid_buttons_press(chr, 1);
-// 	}
-// 	else
-// 	{
-// 		hid_buttons_release(chr, 1);
-// 		if (++chr == (hello_world_str + sizeof(hello_world_str)))
-// 		{
-// 			chr = hello_world_str;
-// 		}
-// 	}
-// }
-
-// static void button_shift_changed(bool down)
-// {
-// 	if (down)
-// 	{
-// 		hid_buttons_press(shift_key, 1);
-// 	}
-// 	else
-// 	{
-// 		hid_buttons_release(shift_key, 1);
-// 	}
-// }
-
 /// @brief 인증을 수락/취소 한다.
 /// @param accept 
 static void setPairingConfirm(bool accept)
@@ -569,141 +291,6 @@ static void setPairingConfirm(bool accept)
 
 	// 불루투스 연결객체의 참조 카운트를 감소
 	bt_conn_unref(pairing_data.conn);
-}
-
-// static void num_comp_reply(bool accept)
-// {
-// 	struct pairing_data_mitm pairing_data;
-// 	struct bt_conn *conn;
-
-// 	if (k_msgq_get(&mitm_queue, &pairing_data, K_NO_WAIT) != 0)
-// 	{
-// 		return;
-// 	}
-
-// 	conn = pairing_data.conn;
-
-// 	if (accept)
-// 	{
-// 		bt_conn_auth_passkey_confirm(conn);
-// 		printk("Numeric Match, conn %p\n", conn);
-// 	}
-// 	else
-// 	{
-// 		bt_conn_auth_cancel(conn);
-// 		printk("Numeric Reject, conn %p\n", conn);
-// 	}
-
-// 	bt_conn_unref(pairing_data.conn);
-
-// 	if (k_msgq_num_used_get(&mitm_queue))
-// 	{
-// 		k_work_submit(&pairing_work);
-// 	}
-// }
-
-// static void button_changed(uint32_t button_state, uint32_t has_changed)
-// {
-// 	// 버튼 상태변화를 감지한 경우 발동
-
-// 	static bool pairing_button_pressed;
-
-// 	uint32_t buttons = button_state & has_changed;
-
-// 	// 인증 허용 관련 키
-// 	// if (k_msgq_num_used_get(&mitm_queue))
-// 	// {
-// 	// 	if (buttons & KEY_PAIRING_ACCEPT)
-// 	// 	{
-// 	// 		pairing_button_pressed = true;
-// 	// 		num_comp_reply(true);
-
-// 	// 		return;
-// 	// 	}
-
-// 	// 	if (buttons & KEY_PAIRING_REJECT)
-// 	// 	{
-// 	// 		pairing_button_pressed = true;
-// 	// 		num_comp_reply(false);
-
-// 	// 		return;
-// 	// 	}
-// 	// }
-
-// 	/* Do not take any action if the pairing button is released. */
-// 	if (pairing_button_pressed &&
-// 		(has_changed & (KEY_PAIRING_ACCEPT | KEY_PAIRING_REJECT)))
-// 	{
-// 		pairing_button_pressed = false;
-
-// 		return;
-// 	}
-
-// 	if (has_changed & KEY_TEXT_MASK)
-// 	{
-// 		button_text_changed((button_state & KEY_TEXT_MASK) != 0);
-// 	}
-// 	if (has_changed & KEY_SHIFT_MASK)
-// 	{
-// 		button_shift_changed((button_state & KEY_SHIFT_MASK) != 0);
-// 	}
-// #if CONFIG_NFC_OOB_PAIRING
-// 	if (has_changed & KEY_ADV_MASK)
-// 	{
-// 		size_t i;
-
-// 		for (i = 0; i < CONFIG_BT_HIDS_MAX_CLIENT_COUNT; i++)
-// 		{
-// 			if (!conn_mode[i].conn)
-// 			{
-// 				advertising_start();
-// 				return;
-// 			}
-// 		}
-
-// 		printk("Cannot start advertising, all connections slots are"
-// 			   " taken\n");
-// 	}
-// #endif
-// }
-
-// /// @brief 배터리 노티파이 시뮬레이션
-// /// @param  
-// static void bas_notify(void)
-// {
-// 	uint8_t battery_level = bt_bas_get_battery_level();
-
-// 	battery_level--;
-
-// 	if (!battery_level)
-// 	{
-// 		battery_level = 100U;
-// 	}
-
-// 	bt_bas_set_battery_level(battery_level);
-// }
-
-int BleHID_update(void)
-{
-
-	// 블루투스 연결상태 LED + 배터리 시뮬레이션 -> 필요 없음
-	// int blink_status = 0;
-	// for (;;)
-	// {
-	// 	if (is_adv)
-	// 	{
-	// 		dk_set_led(ADV_STATUS_LED, (++blink_status) % 2);
-	// 	}
-	// 	else
-	// 	{
-	// 		dk_set_led_off(ADV_STATUS_LED);
-	// 	}
-	// 	k_sleep(K_MSEC(ADV_LED_BLINK_INTERVAL));
-	// 	/* Battery level simulation */
-	// 	bas_notify();
-	// }
-
-	return 0;
 }
 
 static uint8_t getBtnIDtoHidUsages(uint8_t swID)
@@ -769,8 +356,6 @@ static uint8_t getBtnIDtoHidUsages(uint8_t swID)
 
 	return HID_KEY_NONE;
 }
-
-//static bool TestkeyStatusPrev[3];
 
 struct keyQue_t
 {
@@ -876,9 +461,6 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 		// }
 
 		// check key change
-		// keyQue_reset(&keyQue_add);
-		// keyQue_reset(&keyQue_remove);
-
 		for (i = 0; i < ISKEYPRESS_SIZE; i++)
 		{
 			if(isKeyPress[i] != isKeyPressPrev[i])
@@ -961,77 +543,6 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 				hid_kb_1_key_report_send(&kb_state[1]);
 			}
 		}
-		
-
-		// // check key change
-		// if (memcmp(isKeyPress, isKeyPressPrev, ISKEYPRESS_SIZE) != 0)
-		// {
-		// 	// init
-		// 	uint8_t addcnt = 0;
-		// 	memset(kb_state, 0, sizeof(kb_state));
-
-		// 	// make msg
-		// 	for (i = 0; i < ISKEYPRESS_SIZE; i++)
-		// 	{
-		// 		if(isKeyPress[i] == true)
-		// 		{
-		// 			kb_state[addcnt / KEYS_STATE_SIZE].keys_state[addcnt % KEYS_STATE_SIZE] = getBtnIDtoHidUsages(i);
-
-		// 			++addcnt;
-		// 			if(addcnt >= KEYPRESS_LMITE)
-		// 			{
-		// 				break;
-		// 			}
-		// 		}
-		// 	}
-
-		// 	// msg send
-		// 	hid_kb_0_key_report_send(&kb_state[0]);
-		// 	hid_kb_1_key_report_send(&kb_state[1]);
-			
-
-		// 	// KeyPressPrev update
-		// 	memcpy(isKeyPressPrev, isKeyPress, ISKEYPRESS_SIZE);
-		// }
-
-
-		// if(TestkeyStatusPrev[0] != isKeyPress[0][0])
-		// {
-		// 	TestkeyStatusPrev[0] = isKeyPress[0][0];
-		// 	printk("[isKeyPress[0][0]] %d \n", isKeyPress[0][0]);
-		// 	struct keyboard_state state;
-		// 	memset(&state, 0, sizeof(struct keyboard_state));
-		// 	if (isKeyPress[0][0])
-		// 	{
-		// 		state.keys_state[0] = HID_KEY_A;
-		// 	}
-		// 	hid_kb_0_key_report_send(&state);
-		// }
-		// if (TestkeyStatusPrev[1] != isKeyPress[0][1])
-		// {
-		// 	TestkeyStatusPrev[1] = isKeyPress[0][1];
-		// 	printk("[isKeyPress[0][1]] %d \n", isKeyPress[0][1]);
-		// 	struct keyboard_state state;
-		// 	memset(&state, 0, sizeof(struct keyboard_state));
-		// 	if (isKeyPress[0][1])
-		// 	{
-		// 		state.keys_state[0] = HID_KEY_B;
-		// 	}
-		// 	hid_kb_1_key_report_send(&state);
-		// }
-		// if (TestkeyStatusPrev[2] != isKeyPress[0][2])
-		// {
-		// 	TestkeyStatusPrev[2] = isKeyPress[0][2];
-		// 	printk("[isKeyPress[0][2]] %d \n", isKeyPress[0][2]);
-		// 	struct keyboard_state state;
-		// 	memset(&state, 0, sizeof(struct keyboard_state));
-		// 	if (isKeyPress[0][2])
-		// 	{
-		// 		state.keys_state[0] = HID_KEY_C;
-		// 	}
-		// 	hid_kb_0_key_report_send(&state);
-		// 	hid_kb_1_key_report_send(&state);
-		// }
 	}
 }
 
@@ -1088,14 +599,7 @@ int bleHid_init(void)
 		settings_load();
 	}
 
-// #if CONFIG_NFC_OOB_PAIRING
-// 	k_work_init(&adv_work, delayed_advertising_start);
-// 	app_nfc_init();
-// #else
 	advertising_start();
-// #endif
-
-	// k_work_init(&pairing_work, pairing_process);
 
 	return 0;
 }
@@ -1108,14 +612,8 @@ int bleHid_thread_start(void)
 					NULL, NULL, NULL,
 					7, 0, K_NO_WAIT);
 
-	// k_thread_create(&thread_data_blehid_1, thread_stack_area_blehid_1,
-	// 				K_THREAD_STACK_SIZEOF(thread_stack_area_blehid_1),
-	// 				thread_KeyUpdate,
-	// 				NULL, NULL, NULL,
-	// 				3, 0, K_NO_WAIT);
-
-	// k_thread_start(&thread_data_blehid_0);
-	// k_thread_start(&thread_data_blehid_1);
+	 k_thread_start(&thread_data_blehid_0);
+	 
 	return 0;
 }
 

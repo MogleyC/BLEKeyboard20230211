@@ -59,13 +59,6 @@ static const struct gpio_dt_spec btnsens[] = {
     GPIO_DT_SPEC_GET(DT_NODELABEL(btn_3), gpios),
 };
 
-// #define BUTTONS_NODE DT_PATH(buttons)
-// static const struct gpio_dt_spec btnsens[] = {
-// #if DT_NODE_EXISTS(BUTTONS_NODE)
-// 	DT_FOREACH_CHILD(BUTTONS_NODE, GPIO_SPEC_AND_COMMA)
-// #endif
-// };
-
 /**
  * ------------ define gpioID end -----------------
 */
@@ -116,21 +109,6 @@ int gpio_init(void)
 
 	return 0;
 }
-
-// int gpio_set(const struct gpio_dt_spec *spec, int value)
-// {
-// 	return gpio_pin_set_dt(spec, value);
-// }
-
-// int gpio_get(const struct gpio_dt_spec *spec)
-// {
-// 	return gpio_pin_get_dt(spec);
-// }
-
-// int gpio_tgl(const struct gpio_dt_spec *spec)
-// {
-// 	return gpio_pin_toggle_dt(spec);
-// }
 
 static void thread_LedUpdate(void *arg1, void *arg2, void *arg3)
 {
