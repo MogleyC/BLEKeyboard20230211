@@ -1,30 +1,40 @@
 #include "bleProfile_HidKeyboard_def.h"
 
+#include "gpio.h"
+
 /**
- * @brief CAPS_LOCK 상태를 표출
+ * @brief led(CAPSLOCK/NUMLOCK 등) 상태를 표출
  *
  */
-static void caps_lock_handler(const struct bt_hids_rep *rep)
+static void led_handler(const struct bt_hids_rep *rep)
 {
-	// uint8_t report_val = ((*rep->data) & OUTPUT_REPORT_BIT_MASK_CAPS_LOCK) ? 1 : 0;
-	// dk_set_led(LED_CAPS_LOCK, report_val);
+	{
+
+		LEDstatus report_val = ((*rep->data) & OUTPUT_REPORT_BIT_MASK_NUM_LOCK) ? LEDstatus_isOn : LEDstatus_isOff;
+		gpio_setStatusLed(report_val);
+		// printk("[led_handler] NUM_LOCK:%d\n", report_val);
+	}
+
+	// {
+	// 	uint8_t report_val = ((*rep->data) & OUTPUT_REPORT_BIT_MASK_CAPS_LOCK) ? 1 : 0;
+	// 	printk("[led_handler] CAPS_LOCK:%d\n", report_val);
+	// }
 }
 
 static void hids_outp_rep_handler(struct bt_hids_rep *rep,
 								  struct bt_conn *conn,
 								  bool write)
 {
-	char addr[BT_ADDR_LE_STR_LEN];
-
 	if (!write)
 	{
 		printk("Output report read\n");
 		return;
 	};
 
-	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
-	printk("Output report has been received %s\n", addr);
-	caps_lock_handler(rep);
+	// char addr[BT_ADDR_LE_STR_LEN];
+	// bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
+	// printk("Output report has been received %s\n", addr);
+	led_handler(rep);
 }
 
 /**
@@ -44,7 +54,7 @@ static void hids_boot_kb_outp_rep_handler(struct bt_hids_rep *rep,
 
 	bt_addr_le_to_str(bt_conn_get_dst(conn), addr, sizeof(addr));
 	printk("Boot Keyboard Output report has been received %s\n", addr);
-	caps_lock_handler(rep);
+	led_handler(rep);
 }
 
 void hid_kb_hids_pm_evt_handler(struct conn_mode *conn_mode,
@@ -240,6 +250,8 @@ int hid_kb_set_connected(struct bt_hids *hids_obj,
 		}
 	}
 
+	gpio_setStatusLed(LEDstatus_isOn);
+
 	return err;
 }
 
@@ -261,6 +273,8 @@ int hid_kb_set_disconnected(struct bt_hids *hids_obj,
 			conn_mode[i].conn = NULL;
 		}
 	}
+
+	gpio_setStatusLed(LEDstatus_isBlink);
 
 	return err;
 }

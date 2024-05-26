@@ -11,9 +11,17 @@ struct key_status_msg_data_t
 	bool colKeyInput[4];
 }typedef key_status_msg_data;
 
+enum LEDstatus_e
+{
+	LEDstatus_isOff = 0,
+	LEDstatus_isOn,
+	LEDstatus_isBlink,
+} typedef LEDstatus;
+
+
 int gpio_init(void);
 int gpio_thread_start(void);
-
-struct k_msgq *get_key_status_msg_queue_ptr(void);
+struct k_msgq *get_key_status_msg_queue_ptr();
+int gpio_setStatusLed(LEDstatus set);
 
 #endif

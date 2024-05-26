@@ -25,6 +25,9 @@ K_THREAD_STACK_DEFINE(thread_stack_area_gpio_1, 512);
 static struct k_thread thread_data_gpio_0;
 static struct k_thread thread_data_gpio_1;
 
+// for Status Led
+static LEDstatus isSetting = LEDstatus_isBlink;
+
 // for keyStatus
 
 #define KEY_STATUS_MSG_QUEUE_MAX_CNT 4
@@ -139,10 +142,17 @@ static void thread_LedUpdate(void *arg1, void *arg2, void *arg3)
 	int ret = 0;
 	while (true)
 	{
-		ret = gpio_tgl(&led0);
-		if (ret < 0)
-			return;
-		k_msleep(250);
+		if (isSetting == LEDstatus_isBlink)
+		{
+			ret = gpio_tgl(&led0);
+			if (ret < 0)
+				return;
+			k_msleep(250);
+		}
+		else
+		{
+			k_msleep(10);
+		}
 	}
 }
 
@@ -254,3 +264,21 @@ struct k_msgq *get_key_status_msg_queue_ptr(void)
 	return &key_status_msg_queue;
 }
 
+int gpio_setStatusLed(LEDstatus setting)
+{
+	switch (setting)
+	{
+	case LEDstatus_isOff:
+	case LEDstatus_isOn:
+		isSetting = setting;
+		return gpio_set(&led0, isSetting);
+		break;
+
+	case LEDstatus_isBlink:
+		isSetting = setting;
+		return RESERT_OK;
+		break;
+	}
+
+	return RESERT_ERR;
+}
