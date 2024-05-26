@@ -74,4 +74,29 @@ struct keyboard_state
 	uint8_t keys_state[KEY_PRESS_MAX];
 };
 
+void hid_kb_hids_pm_evt_handler(struct conn_mode *conn_mode,
+									   enum bt_hids_pm_evt evt,
+									   struct bt_conn *conn);
+
+int hid_kb_init(struct bt_hids *hids_obj, bt_hids_pm_evt_handler_t pm_evt_handler);
+
+int hid_kb_set_connected(struct bt_hids *hids_obj,
+						 struct conn_mode *conn_mode,
+						 struct bt_conn *conn);
+
+int hid_kb_set_disconnected(struct bt_hids *hids_obj,
+							struct conn_mode *conn_mode,
+							struct bt_conn *conn);
+
+/** @brief Function process and send keyboard state to all active connections
+ *
+ * Function process global keyboard state and send it to all connected
+ * clients.
+ *
+ * @return 0 on success or negative error code.
+ */
+int hid_kb_key_report_send(struct bt_hids *hids_obj,
+						   struct conn_mode *conn_mode,
+						   const struct keyboard_state *state);
+
 #endif
