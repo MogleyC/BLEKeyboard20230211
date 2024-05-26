@@ -1,7 +1,8 @@
 #ifndef INCLDUE_H_
 #define INCLDUE_H_
 
-#define SUCCESS 0
+#define RESERT_OK 0
+#define RESERT_ERR -1
 
 #include <zephyr/kernel.h>
 

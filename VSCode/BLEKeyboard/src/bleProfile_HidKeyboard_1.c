@@ -119,7 +119,7 @@ static int key_report_con_send(const struct keyboard_state *state,
 	// 일반 6키
 	memcpy(&data[2], state->keys_state, KEY_PRESS_MAX);
 	// printk("[state->keys_state[0] 2] %d\n", state->keys_state[0]);
-	// if (state->keys_state[0] != KEY_NONE)
+	// if (state->keys_state[0] != HID_KEY_NONE)
 	// 	data[2] = HID_KEY_2;
 
 	if (boot_mode)

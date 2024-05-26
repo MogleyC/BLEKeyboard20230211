@@ -70,6 +70,7 @@ static struct k_thread thread_data_blehid_0;
 
 
 static volatile bool is_adv;
+static volatile bool is_BLEConnected = false;
 
 static const struct bt_data ad[] = {
 	BT_DATA_BYTES(BT_DATA_GAP_APPEARANCE,
@@ -224,6 +225,7 @@ static void connected(struct bt_conn *conn, uint8_t err)
 	err = hid_kb_1_set_connected(conn);
 	
 	is_adv = false;
+	is_BLEConnected = true;
 }
 
 static void disconnected(struct bt_conn *conn, uint8_t reason)
@@ -246,6 +248,7 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 // 		is_adv = false;
 // 	}
 // #else
+	is_BLEConnected = false;
 	advertising_start();
 // #endif
 }
@@ -760,14 +763,65 @@ static uint8_t getBtnIDtoHidUsages(uint8_t swID)
 		break;
 
 	default:
-		return KEY_NONE;
+		return HID_KEY_NONE;
 		break;
 	}
 
-	return KEY_NONE;
+	return HID_KEY_NONE;
 }
 
 //static bool TestkeyStatusPrev[3];
+
+struct keyQue_t
+{
+	uint8_t id_fornt;
+	uint8_t id_back;
+	uint8_t data[0xFF + 1];
+
+} typedef keyQue;
+
+static keyQue keyQue_add;
+static keyQue keyQue_remove;
+
+static int keyQue_put(keyQue * keyQue_ptr, uint8_t key_usageVal)
+{
+	if(keyQue_ptr->id_fornt == keyQue_ptr->id_back + 1)
+	{
+		printk("[keyQue_put] err. Queue size is full\n");
+		return RESERT_ERR;
+	}
+
+	keyQue_ptr->data[keyQue_ptr->id_back] = key_usageVal;
+	// printk("[keyQue_put] data[%d] %d\n", keyQue_ptr->id_back, keyQue_ptr->data[keyQue_ptr->id_back]);
+	++(keyQue_ptr->id_back);
+
+	return RESERT_OK;
+}
+
+static int keyQue_pop(keyQue *keyQue_ptr, uint8_t *p_out_key_usageVal)
+{
+	if (keyQue_ptr->id_fornt == keyQue_ptr->id_back)
+	{
+		// printk("[keyQue_pop] err. No more pop data\n");
+		return RESERT_ERR;
+	}
+
+	*p_out_key_usageVal = keyQue_ptr->data[keyQue_ptr->id_fornt];
+	// printk("[keyQue_pop] data[%d] %d\n", keyQue_ptr->id_fornt, keyQue_ptr->data[keyQue_ptr->id_fornt]);
+	++(keyQue_ptr->id_fornt);
+
+	return RESERT_OK;
+}
+
+static uint8_t keyQue_getSize(const keyQue * keyQue_ptr)
+{
+	return (keyQue_ptr->id_back - keyQue_ptr->id_fornt);
+}
+
+static void keyQue_reset(keyQue * keyQue_ptr)
+{
+	memset(keyQue_ptr, 0, sizeof(keyQue));
+}
 
 static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 {
@@ -778,17 +832,37 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 
 	int ret = 0;
 	struct k_msgq * key_status_msg_queue_ptr = get_key_status_msg_queue_ptr();
-	int i;
+	int i, j;
 
 	while (true)
 	{
+		if(is_BLEConnected == false)
+		{
+			// Key Buffer reset
+			{
+				memset(isKeyPress, 0, ISKEYPRESS_SIZE);
+				memset(isKeyPressPrev, 0, ISKEYPRESS_SIZE);
+				memset(kb_state, 0, sizeof(kb_state));
+				keyQue_reset(&keyQue_add);
+				keyQue_reset(&keyQue_remove);
+			}
+
+			// 연결 되기까지 대기
+			while (is_BLEConnected == false)
+			{
+				k_msleep(10);
+				continue;
+			}
+			
+		}
+		
 		memset(isKeyPress, 0, ISKEYPRESS_SIZE);
 		for (i = 0; i < 4; i++)
 		{
 			// 메시지 수신
 			key_status_msg_data msg_data;
 			ret = k_msgq_get(key_status_msg_queue_ptr, &msg_data, K_FOREVER);
-			if (ret != SUCCESS)
+			if (ret != RESERT_OK)
 			{
 				printk("Err. [thread_keyCheck] k_msgq_get\n");
 				continue;
@@ -802,35 +876,123 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 		// }
 
 		// check key change
-		if (memcmp(isKeyPress, isKeyPressPrev, ISKEYPRESS_SIZE) != 0)
-		{
-			// init
-			uint8_t addcnt = 0;
-			memset(kb_state, 0, sizeof(kb_state));
+		// keyQue_reset(&keyQue_add);
+		// keyQue_reset(&keyQue_remove);
 
-			// make msg
-			for (i = 0; i < ISKEYPRESS_SIZE; i++)
+		for (i = 0; i < ISKEYPRESS_SIZE; i++)
+		{
+			if(isKeyPress[i] != isKeyPressPrev[i])
 			{
 				if(isKeyPress[i] == true)
 				{
-					kb_state[addcnt / KEYS_STATE_SIZE].keys_state[addcnt % KEYS_STATE_SIZE] = getBtnIDtoHidUsages(i);
+					// 큐 추가 : 새로운 키 추가 입력
+					printk("[keyQue_add] %d\n", getBtnIDtoHidUsages(i));
+					keyQue_put(&keyQue_add, getBtnIDtoHidUsages(i));
+				}
+				else{
+					// 큐 추가 : 기존 키 삭제
+					printk("[keyQue_remove] %d\n", getBtnIDtoHidUsages(i));
+					keyQue_put(&keyQue_remove, getBtnIDtoHidUsages(i));
+				}
+			}
+		}
 
-					++addcnt;
-					if(addcnt >= KEYPRESS_LMITE)
+		// KeyPressPrev update
+		memcpy(isKeyPressPrev, isKeyPress, ISKEYPRESS_SIZE);
+		if (keyQue_getSize(&keyQue_add) > 0 || keyQue_getSize(&keyQue_remove) > 0)
+		{
+			bool isOver = false;
+			uint8_t key_usageVal;
+			bool isChanged[2];
+			memset(isChanged, 0, sizeof(isChanged));
+			
+			// printk("[keyQue_szie] add:%d remove:%d\n", keyQue_getSize(&keyQue_add), keyQue_getSize(&keyQue_remove));
+
+			// 기존 키 삭제
+			while (keyQue_pop(&keyQue_remove, &key_usageVal) == RESERT_OK)
+			{
+				isOver = false;
+
+				for (i = 0; !isOver && i < 2; i++)
+				{
+					for (j = 0; !isOver && j < KEYS_STATE_SIZE; j++)
 					{
-						break;
+						if (kb_state[i].keys_state[j] == key_usageVal)
+						{
+							// printk("[keyQue_remove] kb_state[%d].keys_state[%d] = key_usageVal:%d\n", i, j, key_usageVal);
+							kb_state[i].keys_state[j] = HID_KEY_NONE;
+							isOver = true;
+							isChanged[i] = true;
+							break;
+						}
+					}
+				}
+			}
+
+			// 새로운 키 추가 입력
+			while (keyQue_pop(&keyQue_add, &key_usageVal) == RESERT_OK)
+			{
+				isOver = false;
+
+				for (i = 0; !isOver && i < 2; i++)
+				{
+					for (j = 0; !isOver && j < KEYS_STATE_SIZE; j++)
+					{
+						if (kb_state[i].keys_state[j] == HID_KEY_NONE)
+						{
+							// printk("[keyQue_add] kb_state[%d].keys_state[%d] = key_usageVal:%d\n", i, j, key_usageVal);
+							kb_state[i].keys_state[j] = key_usageVal;
+							isOver = true;
+							isChanged[i] = true;
+							break;
+						}
 					}
 				}
 			}
 
 			// msg send
-			hid_kb_0_key_report_send(&kb_state[0]);
-			hid_kb_1_key_report_send(&kb_state[1]);
+			// printk("[hid_kb_x_key_report_send] isChanged[0]:%d isChanged[1]:%d\n", isChanged[0], isChanged[1]);
+			if (isChanged[0] == true)
+			{
+				hid_kb_0_key_report_send(&kb_state[0]);
+			}
+			if (isChanged[1] == true)
+			{
+				hid_kb_1_key_report_send(&kb_state[1]);
+			}
+		}
+		
+
+		// // check key change
+		// if (memcmp(isKeyPress, isKeyPressPrev, ISKEYPRESS_SIZE) != 0)
+		// {
+		// 	// init
+		// 	uint8_t addcnt = 0;
+		// 	memset(kb_state, 0, sizeof(kb_state));
+
+		// 	// make msg
+		// 	for (i = 0; i < ISKEYPRESS_SIZE; i++)
+		// 	{
+		// 		if(isKeyPress[i] == true)
+		// 		{
+		// 			kb_state[addcnt / KEYS_STATE_SIZE].keys_state[addcnt % KEYS_STATE_SIZE] = getBtnIDtoHidUsages(i);
+
+		// 			++addcnt;
+		// 			if(addcnt >= KEYPRESS_LMITE)
+		// 			{
+		// 				break;
+		// 			}
+		// 		}
+		// 	}
+
+		// 	// msg send
+		// 	hid_kb_0_key_report_send(&kb_state[0]);
+		// 	hid_kb_1_key_report_send(&kb_state[1]);
 			
 
-			// KeyPressPrev update
-			memcpy(isKeyPressPrev, isKeyPress, ISKEYPRESS_SIZE);
-		}
+		// 	// KeyPressPrev update
+		// 	memcpy(isKeyPressPrev, isKeyPress, ISKEYPRESS_SIZE);
+		// }
 
 
 		// if(TestkeyStatusPrev[0] != isKeyPress[0][0])

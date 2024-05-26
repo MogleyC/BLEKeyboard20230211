@@ -185,7 +185,7 @@ static void thread_KeyInputUpdate(void *arg1, void *arg2, void *arg3)
 			// 체크할 행 지정
 			{
 				ret = gpio_set(&btnpwr[rowIdx], 1);
-				if (ret != SUCCESS)
+				if (ret != RESERT_OK)
 				{
 					printk("Err. [thread_KeyInputUpdate] gpio_set\n");
 					return;
@@ -205,7 +205,7 @@ static void thread_KeyInputUpdate(void *arg1, void *arg2, void *arg3)
 
 				// 메시지 발송
 				ret = k_msgq_put(&key_status_msg_queue, &msg_data, K_NO_WAIT);
-				if (ret != SUCCESS)
+				if (ret != RESERT_OK)
 				{
 					printk("Err. [thread_KeyInputUpdate] k_msgq_put\n");
 					return;
@@ -216,7 +216,7 @@ static void thread_KeyInputUpdate(void *arg1, void *arg2, void *arg3)
 			// GPIO 초기화
 			{
 				ret = gpio_set(&btnpwr[rowIdx], 0);
-				if (ret != SUCCESS)
+				if (ret != RESERT_OK)
 				{
 					printk("Err. [thread_KeyInputUpdate] gpio_set\n");
 					return;
