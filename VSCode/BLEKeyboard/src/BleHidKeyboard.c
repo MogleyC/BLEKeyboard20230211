@@ -117,8 +117,12 @@ K_MSGQ_DEFINE(mitm_queue,
 			  4);
 
 
-
-static bool isKeyPress[4][4] = {0};
+#define ISKEYPRESS_SIZE 16	// = col:4 * row:4
+#define KEYS_STATE_SIZE KEY_PRESS_MAX
+#define KEYPRESS_LMITE KEY_PRESS_MAX * 2
+static bool isKeyPress[ISKEYPRESS_SIZE] = {0};
+static bool isKeyPressPrev[ISKEYPRESS_SIZE] = {0};
+static struct keyboard_state kb_state[2];
 
 static void setPairingConfirm(bool accept);
 
@@ -699,7 +703,71 @@ int BleHID_update(void)
 	return 0;
 }
 
-static bool TestkeyStatusPrev[3];
+static uint8_t getBtnIDtoHidUsages(uint8_t swID)
+{
+	switch (swID)
+	{
+	case 0:
+		return HID_KEY_KP0;
+		break;
+	case 1:
+		return HID_KEY_KPDOT;
+		break;
+	case 2:
+		return HID_KEY_KPASTERISK;
+		break;
+	case 3:
+		return HID_KEY_KPENTER;
+		break;
+
+	case 4:
+		return HID_KEY_KP1;
+		break;
+	case 5:
+		return HID_KEY_KP2;
+		break;
+	case 6:
+		return HID_KEY_KP3;
+		break;
+	case 7:
+		return HID_KEY_KPPLUS;
+		break;
+
+	case 8:
+		return HID_KEY_KP4;
+		break;
+	case 9:
+		return HID_KEY_KP5;
+		break;
+	case 10:
+		return HID_KEY_KP6;
+		break;
+	case 11:
+		return HID_KEY_KPMINUS;
+		break;
+
+	case 12:
+		return HID_KEY_KP7;
+		break;
+	case 13:
+		return HID_KEY_KP8;
+		break;
+	case 14:
+		return HID_KEY_KP9;
+		break;
+	case 15:
+		return HID_KEY_NUMLOCK;
+		break;
+
+	default:
+		return KEY_NONE;
+		break;
+	}
+
+	return KEY_NONE;
+}
+
+//static bool TestkeyStatusPrev[3];
 
 static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 {
@@ -710,11 +778,12 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 
 	int ret = 0;
 	struct k_msgq * key_status_msg_queue_ptr = get_key_status_msg_queue_ptr();
+	int i;
 
 	while (true)
 	{
-		memset(isKeyPress, 0, sizeof(isKeyPress));
-		for (int8_t i = 0; i < 4; i++)
+		memset(isKeyPress, 0, ISKEYPRESS_SIZE);
+		for (i = 0; i < 4; i++)
 		{
 			// 메시지 수신
 			key_status_msg_data msg_data;
@@ -724,50 +793,83 @@ static void thread_keyCheck(void *arg1, void *arg2, void *arg3)
 				printk("Err. [thread_keyCheck] k_msgq_get\n");
 				continue;
 			}
-			memcpy(isKeyPress[msg_data.rowIdx], msg_data.colKeyInput, sizeof(isKeyPress[msg_data.rowIdx]));
+			memcpy(&isKeyPress[msg_data.rowIdx * 4], msg_data.colKeyInput, sizeof(msg_data.colKeyInput));
 		}
 
-		// for (int8_t i = 3; i >= 0; --i)
+		// for (i = 3; i >= 0; --i)
 		// {
-		// 	printk("[%d] %d %d %d %d\n", i, isKeyPress[i][0], isKeyPress[i][1], isKeyPress[i][2], isKeyPress[i][3]);
+		// 	printk("[%d] %d %d %d %d\n", i, isKeyPress[i * 4 + 0], isKeyPress[i * 4 + 1], isKeyPress[i * 4 + 2], isKeyPress[i * 4 + 3]);
 		// }
-		if(TestkeyStatusPrev[0] != isKeyPress[0][0])
+
+		// check key change
+		if (memcmp(isKeyPress, isKeyPressPrev, ISKEYPRESS_SIZE) != 0)
 		{
-			TestkeyStatusPrev[0] = isKeyPress[0][0];
-			printk("[isKeyPress[0][0]] %d \n", isKeyPress[0][0]);
-			struct keyboard_state state;
-			memset(&state, 0, sizeof(struct keyboard_state));
-			if (isKeyPress[0][0])
+			// init
+			uint8_t addcnt = 0;
+			memset(kb_state, 0, sizeof(kb_state));
+
+			// make msg
+			for (i = 0; i < ISKEYPRESS_SIZE; i++)
 			{
-				state.keys_state[0] = HID_KEY_A;
+				if(isKeyPress[i] == true)
+				{
+					kb_state[addcnt / KEYS_STATE_SIZE].keys_state[addcnt % KEYS_STATE_SIZE] = getBtnIDtoHidUsages(i);
+
+					++addcnt;
+					if(addcnt >= KEYPRESS_LMITE)
+					{
+						break;
+					}
+				}
 			}
-			hid_kb_0_key_report_send(&state);
+
+			// msg send
+			hid_kb_0_key_report_send(&kb_state[0]);
+			hid_kb_1_key_report_send(&kb_state[1]);
+			
+
+			// KeyPressPrev update
+			memcpy(isKeyPressPrev, isKeyPress, ISKEYPRESS_SIZE);
 		}
-		if (TestkeyStatusPrev[1] != isKeyPress[0][1])
-		{
-			TestkeyStatusPrev[1] = isKeyPress[0][1];
-			printk("[isKeyPress[0][1]] %d \n", isKeyPress[0][1]);
-			struct keyboard_state state;
-			memset(&state, 0, sizeof(struct keyboard_state));
-			if (isKeyPress[0][1])
-			{
-				state.keys_state[0] = HID_KEY_B;
-			}
-			hid_kb_1_key_report_send(&state);
-		}
-		if (TestkeyStatusPrev[2] != isKeyPress[0][2])
-		{
-			TestkeyStatusPrev[2] = isKeyPress[0][2];
-			printk("[isKeyPress[0][2]] %d \n", isKeyPress[0][2]);
-			struct keyboard_state state;
-			memset(&state, 0, sizeof(struct keyboard_state));
-			if (isKeyPress[0][2])
-			{
-				state.keys_state[0] = HID_KEY_C;
-			}
-			hid_kb_0_key_report_send(&state);
-			hid_kb_1_key_report_send(&state);
-		}
+
+
+		// if(TestkeyStatusPrev[0] != isKeyPress[0][0])
+		// {
+		// 	TestkeyStatusPrev[0] = isKeyPress[0][0];
+		// 	printk("[isKeyPress[0][0]] %d \n", isKeyPress[0][0]);
+		// 	struct keyboard_state state;
+		// 	memset(&state, 0, sizeof(struct keyboard_state));
+		// 	if (isKeyPress[0][0])
+		// 	{
+		// 		state.keys_state[0] = HID_KEY_A;
+		// 	}
+		// 	hid_kb_0_key_report_send(&state);
+		// }
+		// if (TestkeyStatusPrev[1] != isKeyPress[0][1])
+		// {
+		// 	TestkeyStatusPrev[1] = isKeyPress[0][1];
+		// 	printk("[isKeyPress[0][1]] %d \n", isKeyPress[0][1]);
+		// 	struct keyboard_state state;
+		// 	memset(&state, 0, sizeof(struct keyboard_state));
+		// 	if (isKeyPress[0][1])
+		// 	{
+		// 		state.keys_state[0] = HID_KEY_B;
+		// 	}
+		// 	hid_kb_1_key_report_send(&state);
+		// }
+		// if (TestkeyStatusPrev[2] != isKeyPress[0][2])
+		// {
+		// 	TestkeyStatusPrev[2] = isKeyPress[0][2];
+		// 	printk("[isKeyPress[0][2]] %d \n", isKeyPress[0][2]);
+		// 	struct keyboard_state state;
+		// 	memset(&state, 0, sizeof(struct keyboard_state));
+		// 	if (isKeyPress[0][2])
+		// 	{
+		// 		state.keys_state[0] = HID_KEY_C;
+		// 	}
+		// 	hid_kb_0_key_report_send(&state);
+		// 	hid_kb_1_key_report_send(&state);
+		// }
 	}
 }
 
