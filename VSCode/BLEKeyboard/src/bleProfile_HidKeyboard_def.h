@@ -12,8 +12,6 @@
 #define INPUT_REP_KEYS_REF_ID 0
 #define OUTPUT_REP_KEYS_REF_ID 0
 #define SCAN_CODE_POS 2
-#define KEYS_MAX_LEN (INPUT_REPORT_KEYS_MAX_LEN - \
-					  SCAN_CODE_POS)
 
 /* Buttons configuration */
 
@@ -26,8 +24,9 @@
 #define KEY_CTRL_CODE_MAX 231 /* Control key codes - required 8 of them */
 #define KEY_CODE_MIN 0		  /* Normal key codes */
 #define KEY_CODE_MAX 101	  /* Normal key codes */
-#define KEY_PRESS_MAX 6		  /* Maximum number of non-control keys \
+#define KEY_PRESS_MAX 8		  /* Maximum number of non-control keys \
 							   * pressed simultaneously             \
+							   * default 6							\
 							   */
 
 /* Number of bytes in key report

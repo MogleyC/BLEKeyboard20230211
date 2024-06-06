@@ -123,7 +123,16 @@ static int key_report_con_send(struct bt_hids *hids_obj,
 	memcpy(&data[2], state->keys_state, KEY_PRESS_MAX);
 	// printk("[state->keys_state[0] 1] %d\n", state->keys_state[0]);
 	// if (state->keys_state[0] != HID_KEY_NONE)
-	// 	data[2] = HID_KEY_1;
+	// {
+	// 	data[2] = HID_KEY_2;
+	// 	data[3] = HID_KEY_3;
+	// 	data[4] = HID_KEY_4;
+	// 	data[5] = HID_KEY_5;
+	// 	data[6] = HID_KEY_6;
+	// 	data[7] = HID_KEY_7;
+	// 	data[8] = HID_KEY_8;
+	// 	data[9] = HID_KEY_9;
+	// }
 
 	if (boot_mode)
 	{
@@ -162,14 +171,14 @@ int hid_kb_init(struct bt_hids *hids_obj, bt_hids_pm_evt_handler_t pm_evt_handle
 		0x25, 0x01, /* Logical Maximum (1) */
 		0x75, 0x01, /* Report Size (1) */
 		0x95, 0x08, /* Report Count (8) */
-		// 0x95, INPUT_REPORT_KEYS_MAX_LEN, /* Report Count (x) */
 		0x81, 0x02, /* Input (Data, Variable, Absolute) */
 
 		0x95, 0x01, /* Report Count (1) */
 		0x75, 0x08, /* Report Size (8) */
 		0x81, 0x01, /* Input (Constant) reserved byte(1) */
 
-		0x95, 0x06, /* Report Count (6) */
+		// 0x95, 0x06, /* Report Count (6) */
+		0x95, KEY_PRESS_MAX, /* Report Count (x) */
 		0x75, 0x08, /* Report Size (8) */
 		0x15, 0x00, /* Logical Minimum (0) */
 		0x25, 0x65, /* Logical Maximum (101) */
